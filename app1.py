@@ -36,6 +36,7 @@ def handle_exception(e):
         return jsonify({'error': str(e), 'status': code}), code
     if isinstance(e, HTTPException):
         return e
+    traceback.print_exc()
     return str(e), 500
 
 
