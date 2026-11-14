@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="ms" class="dark" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grad Ready AI</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#A855F7',
+                        brandDark: '#7C3AED'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- 💎 ENTERPRISE GALAXY DESIGN SYSTEM (DARK & LIGHT MODE SEimbang 100%) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=Source+Code+Pro:wght@400;600;700&display=swap');
+
+        :root {
+            /* 🌌 DARK THEME: LUMA GALAXY VIOLET WITH SUBTLE HINT OF TEAL */
+            --bg-gradient: radial-gradient(circle at 15% 15%, #1a083d 0%, #0a192f 35%, #052329 65%, #040814 100%);
+            --header-bg: rgba(10, 15, 32, 0.88);
+            --nav-bar-bg: rgba(18, 25, 48, 0.78);
+            --glass-bg: rgba(18, 24, 46, 0.68);
+            --glass-border: rgba(168, 85, 247, 0.26);
+            --glass-blur: blur(20px);
+            
+            --inner-box-bg: rgba(15, 23, 42, 0.65);
+            --inner-box-border: rgba(168, 85, 247, 0.2);
+            --input-bg: rgba(9, 14, 30, 0.78);
+            --input-border: rgba(148, 163, 184, 0.28);
+            
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --text-muted: #94A3B8;
+            
+            --accent-purple: #A855F7;
+            --accent-blue: #38BDF8;
+            --accent-teal: #14B8A6;
+            --accent-violet: #8B5CF6;
+            --accent-success: #10B981;
+            --accent-danger: #EF4444;
+            
+            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+            --hover-shadow-mewah: 0 16px 40px -8px rgba(168, 85, 247, 0.45), 0 0 25px rgba(20, 184, 166, 0.25);
+        }
+
+        html[data-theme="light"] {
+            /* ☀️ LIGHT THEME: HIGH CONTRAST ROYAL PURPLE WITH CRISP MINT/TEAL TINT */
+            --bg-gradient: linear-gradient(135deg, #F0FDF4 0%, #F5F3FF 35%, #EEF2FF 70%, #ECFDF5 100%);
+            --header-bg: rgba(255, 255, 255, 0.92);
+            --nav-bar-bg: rgba(241, 245, 249, 0.9);
+            --glass-bg: rgba(255, 255, 255, 0.92);
+            --glass-border: rgba(109, 40, 217, 0.2);
+            --glass-blur: blur(16px);
+            
+            --inner-box-bg: rgba(245, 243, 255, 0.75);
+            --inner-box-border: rgba(124, 58, 237, 0.2);
+            --input-bg: #FFFFFF;
+            --input-border: #CBD5E1;
+            
+            --text-primary: #0F172A;
+            --text-secondary: #334155;
+            --text-muted: #64748B;
+            
+            --accent-purple: #7C3AED;
+            --accent-blue: #0284C7;
+            --accent-teal: #0D9488;
+            --accent-violet: #6D28D9;
+            --accent-success: #059669;
+            --accent-danger: #DC2626;
+            
+            --card-shadow: 0 10px 25px -5px rgba(109, 40, 217, 0.1), 0 8px 10px -6px rgba(13, 148, 136, 0.06);
+            --hover-shadow-mewah: 0 20px 35px -5px rgba(124, 58, 237, 0.2), 0 0 18px rgba(13, 148, 136, 0.16);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background 0.35s ease, color 0.35s ease;
+            position: relative;
+        }
+
+        /* HEADER & NAVBAR MENGIKUT TEMA (CERAH & GELAP) */
+        .top-header-shell {
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.35s ease;
+        }
+
+        .nav-bar-shell {
+            background: var(--nav-bar-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+        }
+
+        .nav-btn {
+            color: var(--text-secondary);
+        }
+        .nav-btn:hover {
+            color: var(--text-primary);
+            background: rgba(168, 85, 247, 0.12);
+        }
+        .nav-btn-active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)) !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);
+        }
+
+        /* 🌸 SOFT PINK GRADIENT CURSOR AURA */
+        .cursor-glow {
+            position: fixed;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.22) 0%, rgba(236, 72, 153, 0.08) 40%, rgba(219, 39, 119, 0) 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 99999;
+            transition: opacity 0.3s ease;
+            mix-blend-mode: screen;
+        }
+
+        html[data-theme="light"] .cursor-glow {
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.24) 0%, rgba(236, 72, 153, 0.08) 45%, rgba(219, 39, 119, 0) 72%);
+            mix-blend-mode: multiply;
+        }
+
+        /* 💎 LUXURY GLASSMORPHISM CARD (PADDING KEMAS & TIDAK RAPAT) */
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: 20px;
+            padding: 28px !important;
+            box-shadow: var(--card-shadow);
+            color: var(--text-primary);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow-mewah);
+            border-color: var(--accent-purple);
+        }
+
+        /* KOTAK DALAMAN (INNER BOX) YANG KEMAS & TIDAK PELIK */
+        .inner-box {
+            background: var(--inner-box-bg);
+            border: 1px solid var(--inner-box-border);
+            border-radius: 14px;
+            padding: 18px 20px !important;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* SEMUA INPUT, SELECT & TEXTAREA MENGIKUT TEMA LIGHT / DARK SECARA AUTOMATIK */
+        .theme-input {
+            background: var(--input-bg) !important;
+            border: 1px solid var(--input-border) !important;
+            color: var(--text-primary) !important;
+            border-radius: 12px;
+            padding: 11px 14px;
+            font-size: 14px;
+            width: 100%;
+            transition: all 0.25s ease;
+        }
+        .theme-input:focus {
+            outline: none;
+            border-color: var(--accent-teal) !important;
+            box-shadow: 0 0 12px rgba(20, 184, 166, 0.28);
+        }
+        .theme-input option {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+        }
+        html[data-theme="light"] .theme-input option {
+            background: #FFFFFF;
+            color: #0F172A;
+        }
+
+        .theme-label {
+            color: var(--text-secondary) !important;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* ⌨️ TYPEWRITER GLOW CONTAINERS */
+        .typewriter-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            box-shadow: 0 0 15px rgba(20, 184, 166, 0.18);
+        }
+
+        .typewriter {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-teal);
+            border-right: 2.5px solid var(--accent-purple);
+            padding-right: 4px;
+            white-space: nowrap;
+            min-height: 20px;
+            display: inline-block;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* 🔘 CAPSULE TOGGLE SWITCH (PILL SLIDER) */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 12px;
+            background: var(--inner-box-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #1e1b4b, #042f2e);
+            border: 1px solid var(--accent-purple);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "🌙";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 3px;
+            background: white;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(135deg, #0d9488, #818cf8);
+            border-color: #0d9488;
+        }
+
+        input:checked + .slider:before {
+            content: "☀️";
+            transform: translateX(24px);
+            background: #FFFBEB;
+        }
+
+        /* TIPOGRAFI PROSE KEMAS & TERATUR */
+        .prose { font-size: 15px !important; line-height: 1.8 !important; color: var(--text-secondary) !important; }
+        .prose h1 { font-size: 22px !important; line-height: 1.35 !important; font-weight: 800 !important; margin-top: 1.4rem !important; margin-bottom: 0.85rem !important; color: var(--accent-purple) !important; }
+        .prose h2 { font-size: 19px !important; line-height: 1.4 !important; font-weight: 800 !important; margin-top: 1.35rem !important; margin-bottom: 0.75rem !important; color: var(--accent-purple) !important; }
+        .prose h3, .prose h4 { font-size: 16px !important; line-height: 1.45 !important; font-weight: 700 !important; margin-top: 1.15rem !important; margin-bottom: 0.6rem !important; color: var(--accent-teal) !important; }
+        .prose p { font-size: 15px !important; margin-bottom: 1.1rem !important; line-height: 1.8 !important; color: var(--text-secondary) !important; }
+        .prose strong { color: var(--text-primary) !important; font-weight: 700 !important; }
+        .prose ul, .prose ol { padding-left: 1.6rem !important; margin-bottom: 1.2rem !important; }
+        .prose ul { list-style-type: disc; }
+        .prose ol { list-style-type: decimal; }
+        .prose li { font-size: 15px !important; margin-bottom: 0.5rem !important; line-height: 1.75 !important; color: var(--text-secondary) !important; }
+        .prose table { width: 100%; border-collapse: collapse; margin: 1.25rem 0 !important; font-size: 14px !important; color: var(--text-primary) !important; }
+        .prose th { background: rgba(168, 85, 247, 0.1); font-weight: 700; color: var(--text-primary) !important; }
+        .prose th, .prose td { border: 1px solid var(--glass-border); padding: 11px 14px !important; text-align: left; }
+        .prose blockquote { border-left: 4px solid var(--accent-purple); font-style: italic; margin: 1.25rem 0 !important; background: rgba(168, 85, 247, 0.06); padding: 14px 18px; border-radius: 0 12px 12px 0; color: var(--text-primary) !important; }
+        .prose hr { border-color: var(--glass-border); margin: 1.5rem 0 !important; }
+
+        /* ⬆️ FLOATING ROUNDED BACK TO TOP BUTTON */
+        .btn-back-to-top {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--accent-teal);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.35);
+            backdrop-filter: blur(12px);
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-back-to-top:hover {
+            background: var(--accent-teal);
+            color: #FFFFFF;
+            transform: translateY(-4px) scale(1.08);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.6);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- 🌸 SOFT PINK GRADIENT CURSOR AURA -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
+    <!-- TOP HERO HEADER (Tanpa badge iGEN 2027 • KPTM AS) -->
+    <header class="top-header-shell shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col lg:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-600 to-teal-500 flex items-center justify-center text-2xl text-white shadow-lg shadow-purple-500/30">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-extrabold tracking-tight" style="font-family: 'Sora', sans-serif; background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Grad Ready AI</h1>
+                    <p class="text-xs mt-0.5" style="color: var(--text-muted);" id="header-desc">Inclusive AI Interview, Job Tailor & Workplace Coach for Future Graduates</p>
+                </div>
+            </div>
+
+            <!-- CONTROLS: DROPDOWN BAHASA, CAPSULE SLIDER TEMA & PROFIL BULAT -->
+            <div class="flex flex-wrap items-center gap-3.5">
+                <!-- 1. Dropdown Bahasa (Bendera MY & US) -->
+                <div class="relative" id="lang-dropdown-wrapper">
+                    <button onclick="toggleLangDropdown(event)" class="inner-box !py-2 !px-3.5 text-xs font-bold flex items-center gap-2 cursor-pointer hover:border-purple-500">
+                        <img id="current-lang-flag" src="https://flagcdn.com/w20/my.png" class="w-4 h-3 rounded-sm object-cover" alt="Flag">
+                        <span id="current-lang-label">Bahasa Melayu</span>
+                        <i class="fa-solid fa-chevron-down text-[10px]" style="color: var(--text-muted);"></i>
+                    </button>
+                    <div id="lang-dropdown-menu" class="absolute right-0 mt-2 w-44 glass-card !p-2 hidden z-50">
+                        <button onclick="pilihBahasa('MY')" class="w-full px-3 py-2 rounded-lg text-left text-xs font-bold hover:bg-purple-500/15 flex items-center gap-2.5 transition">
+                            <img src="https://flagcdn.com/w20/my.png" class="w-4 h-3 rounded-sm object-cover" alt="MY">
+                            <span>🇲🇾 Bahasa Melayu</span>
+                        </button>
+                        <button onclick="pilihBahasa('EN')" class="w-full px-3 py-2 rounded-lg text-left text-xs font-bold hover:bg-purple-500/15 flex items-center gap-2.5 transition mt-1">
+                            <img src="https://flagcdn.com/w20/us.png" class="w-4 h-3 rounded-sm object-cover" alt="US">
+                            <span>🇺🇸 English (US)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Capsule Pill Slider (Dark / Light Mode) -->
+                <div class="theme-switch-wrapper">
+                    <span class="text-[11px] font-extrabold tracking-wider" style="color: var(--text-secondary);" id="theme-text-label">MOD GELAP</span>
+                    <label class="switch" title="Tukar Mod Gelap / Mod Cerah">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- 3. Seksyen Login / Profil Bulat ("AA", "QB", "NN") -->
+                <div id="auth-section" class="relative">
+                    <button onclick="bukaModalAuth()" class="bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white px-4 py-2.5 rounded-xl text-xs font-extrabold shadow-lg shadow-purple-500/25 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-user-plus"></i> <span id="btn-login-text">Log Masuk / Daftar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5 NAVBAR MODEN (Tanpa Nombor 1,2,3,4,5 di depan) -->
+        <div class="max-w-7xl mx-auto px-6 pb-4">
+            <nav class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 nav-bar-shell p-2 rounded-2xl">
+                <button onclick="bukaTab('tab-resume')" id="btn-tab-resume" class="nav-btn nav-btn-active py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-file-shield"></i> <span id="nav-1">Imbasan Resume</span>
+                </button>
+                <button onclick="bukaTab('tab-temuduga')" id="btn-tab-temuduga" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-microphone-lines"></i> <span id="nav-2">Temuduga & Vision</span>
+                </button>
+                <button onclick="bukaTab('tab-padanan')" id="btn-tab-padanan" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-compass"></i> <span id="nav-3">Padanan & Gaji</span>
+                </button>
+                <button onclick="bukaTab('tab-jobmatch')" id="btn-tab-jobmatch" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="nav-4">Job Match</span>
+                </button>
+                <button onclick="bukaTab('tab-workcoach')" id="btn-tab-workcoach" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
+                    <i class="fa-solid fa-briefcase"></i> <span id="nav-5">Work Coach</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full">
+
+        <!-- Typewriter Infinite Loop Bar (Tanpa Online Secure Badge) -->
+        <div class="mb-7">
+            <div class="typewriter-box">
+                <i class="fa-solid fa-terminal text-xs" style="color: var(--accent-purple);"></i>
+                <span class="typewriter" id="typewriter-text"></span>
+            </div>
+        </div>
+
+        <!-- ================= NAVBAR 1: ATS SCANNER ================= -->
+        <section id="tab-resume" class="tab-content block">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+                <div class="lg:col-span-5 glass-card space-y-5">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider" style="color: var(--accent-teal);" id="t1-sub">Modul 1 • Saringan Pintar</span>
+                        <h2 class="text-xl font-extrabold mt-1" style="font-family: 'Sora', sans-serif;" id="t1-title">Pengimbas Resume ATS & STAR</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="theme-label" id="t1-lbl1">Sasaran Jawatan / Latihan Industri</label>
+                            <input type="text" id="m1-jawatan" value="Software Engineer / Full-Stack Intern" class="theme-input">
+                        </div>
+                        <div>
+                            <label class="theme-label" id="t1-lbl2">Muat Naik Fail Resume (.PDF)</label>
+                            <input type="file" id="m1-file" accept=".pdf" class="theme-input !p-3 border-dashed cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white hover:file:bg-purple-700">
+                        </div>
+                        <button onclick="hantarResume()" class="w-full bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-purple-500/25 transition flex items-center justify-center gap-2 text-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="t1-btn">Imbas & Analisis Resume Sekarang</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 glass-card flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center border-b pb-4 mb-5" style="border-color: var(--glass-border);">
+                            <h3 class="font-extrabold text-lg" style="font-family: 'Sora', sans-serif;" id="t1-res-title">Keputusan Penilaian ATS</h3>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold" style="color: var(--text-muted);" id="t1-score-lbl">Skor ATS:</span>
+                                <span id="m1-skor-badge" class="bg-emerald-500/15 text-emerald-500 border border-emerald-500/30 font-extrabold px-3.5 py-1 rounded-full text-sm">-- / 100</span>
+                            </div>
+                        </div>
+                        <div id="m1-hasil" class="prose max-h-[500px] overflow-y-auto pr-2">
+                            <div class="text-center py-16" style="color: var(--text-muted);">
+                                <i class="fa-solid fa-file-arrow-up text-4xl mb-3" style="color: var(--accent-purple);"></i>
+                                <p class="font-bold text-base" style="color: var(--text-primary);" id="t1-empty1">Belum ada resume diimbas.</p>
+                                <p class="text-xs mt-1 max-w-md mx-auto" id="t1-empty2">Muat naik fail PDF resume anda di sebelah kiri untuk melihat analisis kata kunci sebenar dan penambahbaikan kaedah STAR.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= NAVBAR 2: TEMUDUGA & VISION ================= -->
+        <section id="tab-temuduga" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card space-y-4">
+                        <div>
+                            <span class="text-xs font-extrabold uppercase tracking-wider" style="color: var(--accent-teal);" id="t2-sub">Langkah 1 • Persediaan Penemuduga</span>
+                            <h3 class="text-lg font-extrabold mt-1" style="font-family: 'Sora', sans-serif;" id="t2-title">Tetapan Sesi Temuduga</h3>
+                        </div>
+                        <div class="space-y-3.5">
+                            <div>
+                                <label class="theme-label" id="t2-lbl1">Jawatan Dipohon</label>
+                                <input type="text" id="m2-jawatan" value="Junior Software Developer" class="theme-input">
+                            </div>
+                            <div>
+                                <label class="theme-label" id="t2-lbl2">Persona Penemuduga AI</label>
+                                <select id="m2-persona" class="theme-input">
+                                    <option value="Friendly HR Executive" id="opt-p1">😊 Mesra (Eksekutif HR - Bina Keyakinan)</option>
+                                    <option value="Strict Technical Lead" id="opt-p2">🧐 Tegas & Kritikal (Ketua Jurutera Teknikal)</option>
+                                    <option value="Corporate GLC Panel" id="opt-p3">👥 Panel Korporat GLC Malaysia</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button onclick="janaSoalan()" class="w-full bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white font-bold py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-solid fa-bolt"></i> <span id="t2-btn-q">Jana 3 Soalan Temuduga</span>
+                        </button>
+                    </div>
+
+                    <!-- AI Computer Vision -->
+                    <div class="glass-card space-y-4">
+                        <div class="flex flex-wrap justify-between items-center gap-2">
+                            <div>
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-rose-500">Computer Vision AI</span>
+                                <h3 class="text-lg font-extrabold mt-0.5" style="font-family: 'Sora', sans-serif;" id="t2-v-title">Analisis Bahasa Badan & Pakaian</h3>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="bukaKamera()" id="btn-start-cam" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3.5 py-2 rounded-lg font-bold transition flex items-center gap-1.5">
+                                    <i class="fa-solid fa-video"></i> <span id="t2-v-start">Hidupkan Kamera</span>
+                                </button>
+                                <button onclick="hentiKamera()" id="btn-stop-cam" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-3.5 py-2 rounded-lg font-bold transition hidden flex items-center gap-1.5">
+                                    <i class="fa-solid fa-video-slash"></i> <span id="t2-v-stop">Hentikan Kamera</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="relative rounded-xl overflow-hidden bg-slate-950 aspect-video flex items-center justify-center border" style="border-color: var(--glass-border);">
+                            <video id="webcam-video" autoplay playsinline class="w-full h-full object-cover hidden"></video>
+                            <img id="webcam-preview" class="w-full h-full object-cover hidden" alt="Snapshot">
+                            <canvas id="webcam-canvas" class="hidden"></canvas>
+                            <div id="webcam-placeholder" class="text-center text-slate-400 p-5">
+                                <i class="fa-solid fa-camera text-3xl mb-2" style="color: var(--accent-purple);"></i>
+                                <p class="text-xs leading-relaxed" id="webcam-status-text">Klik "Hidupkan Kamera" untuk menguji Eye Contact, Ekspresi Wajah & Etika Pemakaian.</p>
+                            </div>
+                        </div>
+
+                        <button onclick="analisisVision()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fa-solid fa-camera-retro"></i> <span id="t2-v-cap">Tangkap Gambar & Hentikan Kamera Automatik</span>
+                        </button>
+
+                        <div id="m2-vision-output" class="prose inner-box hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Kanan: Simulasi Soal Jawab + Speech Analytics -->
+                <div class="lg:col-span-7 glass-card space-y-5">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider" style="color: var(--accent-teal);" id="t2-r-sub">Speech & Filler Words Analytics</span>
+                        <h3 class="text-xl font-extrabold mt-0.5" style="font-family: 'Sora', sans-serif;" id="t2-r-title">Simulasi Soal Jawab & Pengesan Bahasa Rojak</h3>
+                    </div>
+
+                    <div class="inner-box">
+                        <h4 class="text-xs font-extrabold uppercase mb-2" style="color: var(--accent-purple);" id="t2-q-box-lbl">🎙️ Soalan Penemuduga AI:</h4>
+                        <div id="m2-soalan" class="prose">
+                            Klik <b>"Jana 3 Soalan Temuduga"</b> di panel kiri untuk memulakan sesi.
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex flex-wrap justify-between items-center gap-2 mb-2">
+                            <label class="theme-label !mb-0" id="t2-ans-lbl">Jawapan Anda (Taip atau Gunakan Mikrofon)</label>
+                            <div class="flex gap-2">
+                                <button onclick="toggleSpeech()" id="btn-mic" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition">
+                                    <i class="fa-solid fa-microphone"></i> <span id="mic-text">Rakam Suara</span>
+                                </button>
+                                <button onclick="isiContohJawapan()" class="inner-box !py-1.5 !px-3 text-xs font-bold hover:border-purple-500 cursor-pointer" id="t2-sample-btn">
+                                    Isi Contoh Jawapan
+                                </button>
+                            </div>
+                        </div>
+                        <textarea id="m2-jawapan" oninput="kiraMetrikPertuturan()" rows="4" class="theme-input" placeholder="Taip jawapan atau klik 'Rakam Suara'..."></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3 inner-box">
+                        <div>
+                            <span class="text-[11px] font-bold uppercase" style="color: var(--text-muted);" id="t2-m1">Jumlah Perkataan</span>
+                            <p id="live-words" class="text-lg font-extrabold mt-0.5">0</p>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold uppercase" style="color: var(--text-muted);" id="t2-m2">Filler Words</span>
+                            <p id="live-fillers" class="text-lg font-extrabold text-rose-500 mt-0.5">0x</p>
+                            <p id="live-filler-list" class="text-[11px] truncate" style="color: var(--text-muted);">-</p>
+                        </div>
+                        <div>
+                            <span class="text-[11px] font-bold uppercase" style="color: var(--text-muted);" id="t2-m3">Kelajuan (WPM)</span>
+                            <p id="live-wpm" class="text-lg font-extrabold mt-0.5" style="color: var(--accent-teal);">120 WPM</p>
+                        </div>
+                    </div>
+
+                    <button onclick="nilaiJawapan()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-emerald-600/20 transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-check-double"></i> <span id="t2-submit">Hantar Jawapan & Semak Laporan STAR</span>
+                    </button>
+
+                    <div id="m2-penilaian" class="prose inner-box hidden max-h-[480px] overflow-y-auto"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= NAVBAR 3: PADANAN KERJA, KURSUS & SIMULATOR RUNDINGAN GAJI ================= -->
+        <section id="tab-padanan" class="tab-content hidden space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+                <div class="lg:col-span-4 glass-card space-y-4">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider" style="color: var(--accent-teal);" id="t3-sub">Modul 3A • Kebolehpasaran</span>
+                        <h3 class="text-xl font-extrabold mt-1" style="font-family: 'Sora', sans-serif;" id="t3-title">Padanan Kerjaya, Sijil & Roadmap</h3>
+                    </div>
+                    <div class="space-y-3.5">
+                        <div>
+                            <label class="theme-label" id="t3-lbl1">Program Pengajian KPTM AS</label>
+                            <select id="m3-kursus" class="theme-input">
+                                <option value="Diploma in Computer Science">Diploma in Computer Science</option>
+                        <option value="Diploma in Business Management">Diploma in Business Management</option>
+                        <option value="Diploma in Accounting">Diploma in Accounting</option>
+                        <option value="Diploma in Office Management">Diploma in Office Management</option>
+                        <option value="Diploma in Tourism Management">Diploma in Tourism Management</option>
+                        <option value="Diploma in Sports Management">Diploma in Office Management</option>
+                        <option value="Diploma in Digital Business">Diploma in Digital Business</option>
+                        <option value="Diploma in Digital Marketing">Diploma in Digital Marketing</option>
+                        <option value="Diploma in Islamic Banking & Finance">Diploma in Islamic Banking & Finance</option>
+                        <option value="Diploma in Nursing">Diploma in Nursing</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="theme-label" id="t3-lbl2">Kemahiran & Projek Sedia Ada</label>
+                            <textarea id="m3-kemahiran" rows="3" class="theme-input">Python, PHP, MySQL, Flutter, Web Development, Git</textarea>
+                        </div>
+                        <div>
+                            <label class="theme-label" id="t3-lbl3">Zon Lokasi Sasaran</label>
+                            <input type="text" id="m3-lokasi" value="Alor Setar, Kulim Hi-Tech & Penang" class="theme-input">
+                        </div>
+                    </div>
+                    <button onclick="cariPadanan()" class="w-full bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white font-bold py-3.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-sm shadow-md">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i> <span id="t3-btn">Jana Pelan Kerjaya & Sijil Lengkap</span>
+                    </button>
+                </div>
+
+                <div class="lg:col-span-8 glass-card">
+                    <h3 class="font-extrabold text-lg border-b pb-4 mb-4" style="font-family: 'Sora', sans-serif; border-color: var(--glass-border);" id="t3-res-title">Peta Laluan Kerjaya, Sijil & Projek Portfolio (8 Seksyen)</h3>
+                    <div id="m3-hasil" class="prose max-h-[480px] overflow-y-auto pr-2">
+                        <p id="t3-empty-msg">Klik butang di sebelah kiri untuk menjana cadangan laluan kerjaya, peluang latihan industri, kemahiran, sijil (Percuma vs Berbayar), dan pelan pembangunan kerjaya mengikut bidang pengajian anda.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-SEKSYEN: SIMULATOR RUNDINGAN GAJI & ELAUN (AI HR AUTO-OFFER) -->
+            <div class="glass-card">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+                    <div class="lg:col-span-5 space-y-5">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-emerald-600 text-white text-[11px] font-extrabold px-2.5 py-0.5 rounded-md">AUTO-OFFER AI</span>
+                                <span class="text-xs font-extrabold uppercase tracking-wider" style="color: var(--accent-teal);" id="t3b-sub">Modul 3B • Simulator Rundingan Gaji</span>
+                            </div>
+                            <h3 class="text-xl font-extrabold mt-1.5" style="font-family: 'Sora', sans-serif;" id="t3b-title">💰 Rundingan Gaji & Elaun bersama AI HR</h3>
+                            <p class="text-xs mt-1 leading-relaxed" style="color: var(--text-muted);" id="t3b-desc">Pilih situasi dan jawatan, kemudian klik "1. Jana Tawaran HR". AI HR akan mengeluarkan surat tawaran awal mengikut pasaran sebelum anda mula berunding!</p>
+                        </div>
+
+                        <div class="inner-box space-y-3.5">
+                            <span class="text-xs font-extrabold uppercase" style="color: var(--accent-purple);" id="t3b-step1">Langkah 1: Dapatkan Surat Tawaran AI HR</span>
+                            <div>
+                                <label class="theme-label" id="t3b-lbl1">Situasi Tawaran</label>
+                                <select id="nego-jenis" class="theme-input">
+                                    <option value="Fresh Graduate Starting Salary" id="opt-n1">🎓 Gaji Permulaan Graduan Baharu (Fresh Graduate)</option>
+                                    <option value="Internship Allowance & Transport" id="opt-n2">🏢 Elaun Latihan Industri (Internship) & Pengangkutan</option>
+                                    <option value="Full-Time Conversion After Internship" id="opt-n3">🚀 Penyerapan Kerja Tetap Selepas Tamat Internship</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="theme-label" id="t3b-lbl2">Jawatan Dipohon</label>
+                                <input type="text" id="nego-jawatan" value="Junior Software Developer" class="theme-input">
+                            </div>
+                            <button onclick="janaTawaranHR()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow">
+                                <i class="fa-solid fa-envelope-open-text"></i> <span id="t3b-btn1">1. Jana Tawaran HR (Ikut Logik Pasaran)</span>
+                            </button>
+                        </div>
+
+                        <div class="inner-box space-y-3.5">
+                            <span class="text-xs font-extrabold uppercase" style="color: var(--accent-teal);" id="t3b-step2">Langkah 2: Kemukakan Rundingan Anda</span>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="theme-label" id="t3b-lbl3">Tawaran Awal AI HR:</label>
+                                    <input type="text" id="nego-semasa" value="RM 2,200" readonly class="theme-input font-extrabold cursor-not-allowed opacity-80">
+                                </div>
+                                <div>
+                                    <label class="theme-label" id="t3b-lbl4">Sasaran Gaji/Elaun Anda:</label>
+                                    <input type="text" id="nego-sasaran" value="RM 2,500" class="theme-input font-bold">
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <label class="theme-label !mb-0" id="t3b-lbl5">Ayat Rundingan Anda kepada HR</label>
+                                    <button onclick="isiContohNego()" class="text-xs font-bold hover:underline" style="color: var(--accent-purple);" id="t3b-sample">Isi Contoh Ayat</button>
+                                </div>
+                                <textarea id="nego-hujah" rows="3" class="theme-input" placeholder="Taip alasan dan nilai tambah anda..."></textarea>
+                            </div>
+
+                            <button onclick="hantarRundinganGaji()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs shadow-lg shadow-emerald-600/20 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-comments-dollar"></i> <span id="t3b-btn2">2. Hantar Rundingan & Semak Skrip Emas</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h4 class="font-extrabold text-lg border-b pb-3 mb-4" style="font-family: 'Sora', sans-serif; border-color: var(--glass-border);" id="t3b-right-title">Meja Rundingan AI HR (Surat Tawaran & Penilaian)</h4>
+                            <div id="nego-offer-box" class="inner-box mb-4 prose">
+                                <p class="m-0" id="t3b-offer-empty">Klik butang <b>"1. Jana Tawaran HR"</b> di sebelah kiri untuk menerima surat tawaran awal daripada AI HR.</p>
+                            </div>
+                            <div id="nego-hasil" class="prose inner-box max-h-[400px] overflow-y-auto">
+                                <p class="m-0" id="t3b-nego-empty">Klik <b>"2. Hantar Rundingan"</b> untuk melihat keputusan rundingan serta Skrip Rundingan Emas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= NAVBAR 4: JOB MATCH ================= -->
+        <section id="tab-jobmatch" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+                <div class="lg:col-span-5 glass-card space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-extrabold uppercase tracking-wider" style="color: var(--accent-teal);" id="t4-sub">Modul 4 • Multimodal Job Tailor</span>
+                        <span class="bg-purple-500/15 border border-purple-500/30 text-xs font-bold px-2.5 py-0.5 rounded-full" style="color: var(--accent-purple);">6-Step Grounded AI</span>
+                    </div>
+                    <h2 class="text-xl font-extrabold" style="font-family: 'Sora', sans-serif;" id="t4-title">Penyesuai Iklan Kerja & Penjana Cover Letter / E-mel</h2>
+                    <p class="text-xs leading-relaxed" style="color: var(--text-muted);" id="t4-desc">Muat naik screenshot iklan jawatan kosong ATAU tampal teks iklan. AI akan mengekstrak syarat sebenar iklan, membandingkannya dengan profil anda, dan menulis Cover Letter serta E-mel tanpa menipu pengalaman.</p>
+
+                    <div>
+                        <label class="theme-label" id="t4-lbl1">1. Muat Naik Tangkap Layar (Screenshot) Iklan Kerja (Pilihan)</label>
+                        <input type="file" id="jm-imej" accept="image/*" class="theme-input !p-2.5 border-dashed cursor-pointer file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-purple-600 file:text-white">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="theme-label !mb-0" id="t4-lbl2">2. Atau Tampal (Copy-Paste) Teks Iklan Kerja</label>
+                            <button onclick="isiContohIklan()" class="text-xs font-bold hover:underline" style="color: var(--accent-purple);" id="t4-sample">Isi Contoh Iklan</button>
+                        </div>
+                        <textarea id="jm-teks" rows="4" class="theme-input" placeholder="Tampal teks iklan kerja di sini..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="theme-label" id="t4-lbl3">3. Ringkasan Kemahiran & Kelayakan Sebenar Anda</label>
+                        <textarea id="jm-profil" rows="3" class="theme-input">Diploma in Computer Science KPTM. Kemahiran: PHP, MySQL, Python, Flutter, HTML/CSS, JavaScript, Git.</textarea>
+                    </div>
+
+                    <button onclick="prosesJobMatch()" class="w-full bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-purple-500/25 transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-file-signature"></i> <span id="t4-btn">Analisis Keserasian & Jana Dokumen Permohonan</span>
+                    </button>
+                </div>
+
+                <div class="lg:col-span-7 glass-card flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-wrap justify-between items-center gap-2 border-b pb-4 mb-4" style="border-color: var(--glass-border);">
+                            <div>
+                                <h3 class="font-extrabold text-lg" style="font-family: 'Sora', sans-serif;" id="t4-r-title">Keputusan Padanan & Dokumen Siap Hantar</h3>
+                                <p class="text-xs mt-0.5" style="color: var(--text-muted);" id="t4-r-desc">Jika anda Log Masuk, nama penuh anda dimasukkan secara automatik ke dalam surat & e-mel.</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span id="jm-badge" class="bg-emerald-500/15 text-emerald-500 border border-emerald-500/30 font-extrabold px-3.5 py-1 rounded-full text-xs">Ready</span>
+                                <button onclick="salinDokumenJobMatch()" class="inner-box !py-1.5 !px-3 text-xs font-bold hover:border-purple-500 cursor-pointer">
+                                    <i class="fa-regular fa-copy mr-1"></i> <span id="t4-copy">Salin Teks</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="jm-hasil" class="prose max-h-[540px] overflow-y-auto pr-2">
+                            <div class="text-center py-16" style="color: var(--text-muted);">
+                                <i class="fa-solid fa-envelope-open-text text-4xl mb-3" style="color: var(--accent-purple);"></i>
+                                <p class="font-bold text-base" style="color: var(--text-primary);" id="t4-empty1">Tiada lagi permohonan pukal yang generik!</p>
+                                <p class="text-xs mt-1 max-w-md mx-auto" id="t4-empty2">Muat naik screenshot iklan kerja atau tampal teks iklan di sebelah kiri.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= NAVBAR 5: WORK COACH ================= -->
+        <section id="tab-workcoach" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+                <div class="lg:col-span-5 glass-card space-y-4">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-amber-500" id="t5-sub">Modul 5 • Workplace Readiness Simulator</span>
+                        <h2 class="text-xl font-extrabold mt-1" style="font-family: 'Sora', sans-serif;" id="t5-title">Work Coach: Simulasi Minggu Pertama Kerja & Internship</h2>
+                        <p class="text-xs mt-1 leading-relaxed" style="color: var(--text-muted);" id="t5-desc">Latihan menghadapi situasi kritikal di pejabat supaya pelajar bersedia dari segi mental, adab komunikasi, dan penyelesaian konflik.</p>
+                    </div>
+
+                    <div>
+                        <label class="theme-label" id="t5-lbl1">Pilih Situasi Sebenar di Tempat Kerja</label>
+                        <select id="wc-senario" onchange="tukarSenarioWorkCoach()" class="theme-input font-semibold">
+                            <option value="1" id="opt-wc1">😡 1. Membalas E-mel Klien yang Marah (Isu Sistem Ralat)</option>
+                            <option value="2" id="opt-wc2">🙋‍♂️ 2. Meminta Bantuan Penyelia (Supervisor) secara Profesional</option>
+                            <option value="3" id="opt-wc3">🗣️ 3. Etika Menegur / Memberi Cadangan dalam Mesyuarat</option>
+                            <option value="4" id="opt-wc4">⏰ 4. Menguruskan Kelewatan Tugasan (Deadline Management)</option>
+                        </select>
+                    </div>
+
+                    <div class="inner-box text-xs">
+                        <span class="font-extrabold text-amber-500 block mb-1" id="t5-ctx-lbl"><i class="fa-solid fa-circle-exclamation mr-1"></i> Konteks Situasi:</span>
+                        <p id="wc-konteks" class="leading-relaxed" style="color: var(--text-secondary);">Klien menghantar e-mel dengan nada marah kerana fungsi sistem yang baru dilancarkan mengalami ralat (bug) dan meminta penjelasan segera.</p>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="theme-label !mb-0" id="t5-lbl2">Draf Balasan / Tindakan Anda</label>
+                            <button onclick="isiContohWorkCoach()" class="text-xs font-bold hover:underline" style="color: var(--accent-purple);" id="t5-sample">Isi Contoh Respon</button>
+                        </div>
+                        <textarea id="wc-respon" rows="4" class="theme-input" placeholder="Taip e-mel balasan atau tindakan anda..."></textarea>
+                    </div>
+
+                    <button onclick="nilaiWorkCoach()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-amber-500/20 transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-user-tie"></i> <span id="t5-btn">Nilai Adab Kerja & Profesionalisme Saya</span>
+                    </button>
+                </div>
+
+                <div class="lg:col-span-7 glass-card flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center border-b pb-4 mb-4" style="border-color: var(--glass-border);">
+                            <h3 class="font-extrabold text-lg" style="font-family: 'Sora', sans-serif;" id="t5-r-title">Penilaian Mentor Korporat AI</h3>
+                            <span class="bg-amber-500/15 text-amber-500 border border-amber-500/30 text-xs font-extrabold px-3 py-1 rounded-full">Workplace Etiquette & EQ</span>
+                        </div>
+                        <div id="wc-hasil" class="prose max-h-[500px] overflow-y-auto pr-2">
+                            <div class="text-center py-16" style="color: var(--text-muted);">
+                                <i class="fa-solid fa-people-arrows text-4xl mb-3 text-amber-500"></i>
+                                <p class="font-bold text-base" style="color: var(--text-primary);" id="t5-empty1">Sedia melangkah ke alam pekerjaan sebenar!</p>
+                                <p class="text-xs mt-1 max-w-md mx-auto" id="t5-empty2">Pilih situasi tempat kerja di sebelah kiri dan tulis respon anda. AI akan menilai adab komunikasi dengan jujur dan tegas secara mendalam.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER ASAL YANG KEMAS & MINIMALIS -->
+    <footer class="top-header-shell border-t py-4 px-6 text-center text-xs" style="color: var(--text-muted); border-color: var(--glass-border);" id="footer-text">
+        Grad Ready AI • Ekosistem Kebolehpasaran & Kesediaan Kerjaya Graduan
+    </footer>
+
+    <!-- ⬆️ FLOATING ROUNDED BACK TO TOP BUTTON -->
+    <button class="btn-back-to-top" id="btn-back-to-top" onclick="scrollToTop()" title="Kembali ke Atas">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- MODAL AUTENTIKASI -->
+    <div id="authModal" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="glass-card max-w-md w-full relative mx-4">
+            <button onclick="tutupModalAuth()" class="absolute top-5 right-5 text-slate-400 hover:text-rose-500">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            
+            <!-- Login Form -->
+            <div id="loginFormContainer" class="space-y-4">
+                <h3 class="text-xl font-extrabold" style="color: var(--accent-purple);" id="modal-login-title">Log Masuk Akaun</h3>
+                <p class="text-xs leading-relaxed" style="color: var(--text-muted);" id="modal-login-desc">Apabila anda log masuk, nama penuh anda akan dimasukkan secara automatik ke dalam surat Cover Letter & draf e-mel.</p>
+                <div>
+                    <label class="theme-label" id="modal-login-email-lbl">Emel</label>
+                    <input type="email" id="login-emel" placeholder="jlopez@gmail.com" class="theme-input">
+                </div>
+                <div>
+                    <label class="theme-label" id="modal-login-pass-lbl">Kata Laluan</label>
+                    <input type="password" id="login-kata" placeholder="******" class="theme-input">
+                </div>
+                <button onclick="prosesLogin()" class="w-full bg-gradient-to-r from-purple-600 to-teal-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-md" id="modal-login-btn">Log Masuk Sekarang</button>
+                <p class="text-xs text-center" style="color: var(--text-muted);"><span id="modal-no-acc">Belum ada akaun?</span> <button onclick="paparDaftarForm()" class="font-bold hover:underline" style="color: var(--accent-purple);" id="modal-goto-signup">Daftar Akaun Baharu</button></p>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div id="signupFormContainer" class="space-y-4 hidden">
+                <h3 class="text-xl font-extrabold" style="color: var(--accent-teal);" id="modal-reg-title">Daftar Akaun Baharu</h3>
+                <div>
+                    <label class="theme-label" id="modal-reg-name-lbl">Nama Penuh (Contoh: Ali bin Abu)</label>
+                    <input type="text" id="reg-nama" placeholder="Ali bin Abu" class="theme-input">
+                </div>
+                <div>
+                    <label class="theme-label" id="modal-reg-email-lbl">Emel</label>
+                    <input type="email" id="reg-emel" placeholder="ali@kptm.edu.my" class="theme-input">
+                </div>
+                <div>
+                    <label class="theme-label" id="modal-reg-pass-lbl">Kata Laluan (Min. 6 Aksara)</label>
+                    <input type="password" id="reg-kata" placeholder="******" class="theme-input">
+                </div>
+                <div>
+                    <label class="theme-label" id="modal-reg-course-lbl">Program Pengajian</label>
+                    <select id="reg-kursus" class="theme-input">
+                        <option value="Diploma in Computer Science">Diploma in Computer Science</option>
+                        <option value="Diploma in Business Management">Diploma in Business Management</option>
+                        <option value="Diploma in Accounting">Diploma in Accounting</option>
+                        <option value="Diploma in Office Management">Diploma in Office Management</option>
+                        <option value="Diploma in Tourism Management">Diploma in Tourism Management</option>
+                        <option value="Diploma in Sports Management">Diploma in Office Management</option>
+                        <option value="Diploma in Digital Business">Diploma in Digital Business</option>
+                        <option value="Diploma in Digital Marketing">Diploma in Digital Marketing</option>
+                        <option value="Diploma in Islamic Banking & Finance">Diploma in Islamic Banking & Finance</option>
+                        <option value="Diploma in Nursing">Diploma in Nursing</option>
+                    </select>
+                </div>
+                <button onclick="prosesSignUp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs transition shadow-md" id="modal-reg-btn">Daftar & Terus Log Masuk</button>
+                <p class="text-xs text-center" style="color: var(--text-muted);"><span id="modal-has-acc">Sudah ada akaun?</span> <button onclick="paparLoginForm()" class="font-bold hover:underline" style="color: var(--accent-purple);" id="modal-goto-login">Log Masuk Sini</button></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LENGKAP & BEBAS CRASH 100% -->
+    <script>
+        let currentFillerCount = 0;
+        let currentFillerDetails = "";
+        let currentWPM = 120;
+        let startTime = null;
+        let kameraStream = null;
+        let recognition = null;
+        let sedangRakam = false;
+
+        let APP_LANGUAGE = localStorage.getItem('app_lang') || 'MY';
+        let AKTIF_USER = null;
+        try {
+            AKTIF_USER = JSON.parse(localStorage.getItem('aktif_user')) || null;
+        } catch (e) {
+            AKTIF_USER = null;
+        }
+
+        // OBJEK SENARIO WORK COACH YANG WAJIB ADA SUPAYA TIDAK CRASH!
+        const WC_SCENARIOS = {
+            MY: {
+                "1": "Klien menghantar e-mel dengan nada marah kerana fungsi sistem yang baru dilancarkan mengalami ralat (bug) dan meminta penjelasan segera.",
+                "2": "Anda diberi tugasan teknikal baharu pada minggu pertama internship tetapi buntu selepas mencuba. Bagaimana cara meminta bantuan Penyelia (Supervisor) yang sedang sibuk secara profesional?",
+                "3": "Dalam mesyuarat pasukan, seorang staf senior mencadangkan kaedah yang anda tahu mempunyai kelemahan keselamatan data. Bagaimana cara menyuarakan pendapat dengan beradab?",
+                "4": "Anda menyedari tidak dapat menyiapkan tugasan mengikut tarikh akhir (deadline) petang ini kerana masalah integrasi pangkalan data. Bagaimana cara memaklumkan kepada pengurus?"
+            },
+            EN: {
+                "1": "An angry client sends an urgent email complaining that a newly launched system feature has a critical bug and demands an immediate explanation.",
+                "2": "You are assigned a new technical task during your first week of internship and get stuck after trying on your own. How do you politely ask your busy Supervisor for help?",
+                "3": "During a team meeting, a senior colleague proposes a method that you know has a data security flaw. How do you voice your concern respectfully?",
+                "4": "You realize you cannot meet today's 5:00 PM deadline due to a database integration blocker. How do you communicate this proactively to your manager?"
+            }
+        };
+
+        // 1. TYPEWRITER INFINITE LOOP (DWI-BAHASA & SENTIASA BERGERAK)
+        let typewriterIndex = 0;
+        let isDeleting = false;
+        let wordIndex = 0;
+
+        function getTypewriterPhrases() {
+            if (APP_LANGUAGE === 'EN') {
+                return [
+                    "GRADUATE EMPLOYABILITY AI ENGINE READY...",
+                    "OBJECTIVE ATS RESUME & STAR AUDITOR...",
+                    "MULTIMODAL INTERVIEW & WORKPLACE COACH..."
+                ];
+            }
+            return [
+                "ENJIN KEBOLEHPASARAN GRADUAN AI SEDIA...",
+                "AUDITOR RESUME ATS & KAEDAH STAR OBJEKTIF...",
+                "JURULATIH TEMUDUGA, KERJAYA & ETIKA KERJA..."
+            ];
+        }
+
+        function runTypewriterLoop() {
+            const el = document.getElementById('typewriter-text');
+            if (!el) return;
+
+            const phrases = getTypewriterPhrases();
+            const currentPhrase = phrases[wordIndex % phrases.length];
+
+            if (isDeleting) {
+                typewriterIndex = Math.max(0, typewriterIndex - 1);
+                el.textContent = currentPhrase.substring(0, typewriterIndex);
+            } else {
+                typewriterIndex = Math.min(currentPhrase.length, typewriterIndex + 1);
+                el.textContent = currentPhrase.substring(0, typewriterIndex);
+            }
+
+            let speed = isDeleting ? 28 : 55;
+
+            if (!isDeleting && typewriterIndex === currentPhrase.length) {
+                speed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && typewriterIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % phrases.length;
+                speed = 350;
+            }
+
+            setTimeout(runTypewriterLoop, speed);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 🌗 Set Tema Awal (Default: dark, jika ditukar ke light -> capsule slider bertukar ke kanan ☀️)
+            const themeToggleInput = document.getElementById('theme-toggle');
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyThemeState(savedTheme);
+
+            if (themeToggleInput) {
+                themeToggleInput.checked = (savedTheme === 'light');
+                themeToggleInput.addEventListener('change', () => {
+                    const nextTheme = themeToggleInput.checked ? 'light' : 'dark';
+                    applyThemeState(nextTheme);
+                });
+            }
+
+            terapkanBahasa();
+            kemaskiniUIAutentikasi();
+            runTypewriterLoop();
+
+            // 🌸 Kursor Aura Glow
+            const glow = document.getElementById('cursor-glow');
+            document.addEventListener('mousemove', (e) => {
+                if (glow) {
+                    glow.style.left = e.clientX + 'px';
+                    glow.style.top = e.clientY + 'px';
+                }
+            });
+
+            // Tutup menu dropdown bila klik di luar
+            document.addEventListener('click', (e) => {
+                const langWrap = document.getElementById('lang-dropdown-wrapper');
+                if (langWrap && !langWrap.contains(e.target)) {
+                    document.getElementById('lang-dropdown-menu').classList.add('hidden');
+                }
+                const authWrap = document.getElementById('auth-section');
+                const profMenu = document.getElementById('profile-dropdown-menu');
+                if (profMenu && authWrap && !authWrap.contains(e.target)) {
+                    profMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        function applyThemeState(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            document.documentElement.classList.remove('light', 'dark');
+            document.documentElement.classList.add(themeName);
+            localStorage.setItem('theme', themeName);
+            updateThemeLabelText();
+        }
+
+        function updateThemeLabelText() {
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            const isEN = APP_LANGUAGE === 'EN';
+            setTeks('theme-text-label', isEN ? (isLight ? "LIGHT MODE" : "DARK MODE") : (isLight ? "MOD CERAH" : "MOD GELAP"));
+        }
+
+        window.onscroll = function() {
+            const btn = document.getElementById("btn-back-to-top");
+            if (!btn) return;
+            if (document.body.scrollTop > 250 || document.documentElement.scrollTop > 250) {
+                btn.style.opacity = "1";
+                btn.style.pointerEvents = "auto";
+            } else {
+                btn.style.opacity = "0";
+                btn.style.pointerEvents = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function paparKotakRalat(containerId, mesejRalat, namaFungsiRetry) {
+            const el = document.getElementById(containerId);
+            if (!el) return;
+            const isEN = APP_LANGUAGE === 'EN';
+            const tajuk = isEN ? "AI Analysis Could Not Be Completed" : "Analisis AI Tidak Dapat Disempurnakan";
+            const labelCuba = isEN ? "Try Again" : "Cuba Semula";
+            el.classList.remove('hidden');
+            el.innerHTML = `
+                <div class="inner-box !border-rose-500/50 my-2">
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-triangle-exclamation text-xl text-rose-500 mt-0.5"></i>
+                        <div class="flex-1">
+                            <h4 class="font-extrabold text-base text-rose-500 m-0">${tajuk}</h4>
+                            <p class="text-sm mt-1 mb-3 leading-relaxed">${mesejRalat}</p>
+                            <button onclick="${namaFungsiRetry}()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition inline-flex items-center gap-1.5 shadow">
+                                <i class="fa-solid fa-rotate-right"></i> <span>${labelCuba}</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function bukaTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(tabId);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('nav-btn-active');
+            });
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('nav-btn-active');
+            }
+        }
+
+        function toggleLangDropdown(e) {
+            if (e) e.stopPropagation();
+            document.getElementById('lang-dropdown-menu').classList.toggle('hidden');
+        }
+
+        function pilihBahasa(kod) {
+            APP_LANGUAGE = kod;
+            localStorage.setItem('app_lang', APP_LANGUAGE);
+            document.getElementById('lang-dropdown-menu').classList.add('hidden');
+            if (sedangRakam && recognition) {
+                recognition.stop();
+                sedangRakam = false;
+            }
+            typewriterIndex = 0;
+            isDeleting = false;
+            terapkanBahasa();
+            kemaskiniUIAutentikasi();
+        }
+
+        function setTeks(id, text) {
+            const el = document.getElementById(id);
+            if (el) el.innerText = text;
+        }
+
+        function terapkanBahasa() {
+            const isEN = APP_LANGUAGE === 'EN';
+
+            document.getElementById('current-lang-flag').src = isEN ? "https://flagcdn.com/w20/us.png" : "https://flagcdn.com/w20/my.png";
+            setTeks('current-lang-label', isEN ? "English (US)" : "Bahasa Melayu");
+            setTeks('header-desc', isEN ? "Inclusive AI Interview, Job Tailor & Workplace Coach for Future Graduates" : "Jurulatih Temuduga AI, Penyesuai Iklan Kerja & Etika Pejabat untuk Graduan Masa Hadapan");
+            updateThemeLabelText();
+
+            // 5 Navbar Tanpa Nombor
+            setTeks('nav-1', isEN ? "Resume Scanner" : "Imbasan Resume");
+            setTeks('nav-2', isEN ? "Interview & Vision" : "Temuduga & Vision");
+            setTeks('nav-3', isEN ? "Career & Salary" : "Padanan & Gaji");
+            setTeks('nav-4', isEN ? "Job Match" : "Job Match");
+            setTeks('nav-5', isEN ? "Work Coach" : "Work Coach");
+
+            // Tab 1
+            setTeks('t1-sub', isEN ? "Module 1 • Objective ATS Screening" : "Modul 1 • Saringan Pintar");
+            setTeks('t1-title', isEN ? "ATS & STAR Resume Scanner" : "Pengimbas Resume ATS & STAR");
+            setTeks('t1-lbl1', isEN ? "Target Role / Internship" : "Sasaran Jawatan / Latihan Industri");
+            setTeks('t1-lbl2', isEN ? "Upload Resume File (.PDF)" : "Muat Naik Fail Resume (.PDF)");
+            setTeks('t1-btn', isEN ? "Scan & Analyze Resume Now" : "Imbas & Analisis Resume Sekarang");
+            setTeks('t1-res-title', isEN ? "ATS Assessment Results" : "Keputusan Penilaian ATS");
+            setTeks('t1-score-lbl', isEN ? "ATS Score:" : "Skor ATS:");
+            setTeks('t1-empty1', isEN ? "No resume scanned yet." : "Belum ada resume diimbas.");
+            setTeks('t1-empty2', isEN ? "Upload your PDF resume on the left panel to inspect extracted keywords and STAR bullet rewrites." : "Muat naik fail PDF resume anda di sebelah kiri untuk melihat analisis kata kunci sebenar dan penambahbaikan kaedah STAR.");
+
+            // Tab 2
+            setTeks('t2-sub', isEN ? "Step 1 • Interviewer Setup" : "Langkah 1 • Persediaan Penemuduga");
+            setTeks('t2-title', isEN ? "Interview Session Settings" : "Tetapan Sesi Temuduga");
+            setTeks('t2-lbl1', isEN ? "Applied Position" : "Jawatan Dipohon");
+            setTeks('t2-lbl2', isEN ? "AI Interviewer Persona" : "Persona Penemuduga AI");
+            setTeks('opt-p1', isEN ? "😊 Friendly (HR Executive - Confidence Building)" : "😊 Mesra (Eksekutif HR - Bina Keyakinan)");
+            setTeks('opt-p2', isEN ? "🧐 Strict & Critical (Lead Technical Engineer)" : "🧐 Tegas & Kritikal (Ketua Jurutera Teknikal)");
+            setTeks('opt-p3', isEN ? "👥 Malaysian GLC Corporate Panel" : "👥 Panel Korporat GLC Malaysia");
+            setTeks('t2-btn-q', isEN ? "Generate 3 Interview Questions" : "Jana 3 Soalan Temuduga");
+            setTeks('t2-v-title', isEN ? "Body Language & Attire Analysis" : "Analisis Bahasa Badan & Pakaian");
+            setTeks('t2-v-start', isEN ? "Turn On Camera" : "Hidupkan Kamera");
+            setTeks('t2-v-stop', isEN ? "Stop Camera" : "Hentikan Kamera");
+            setTeks('webcam-status-text', isEN ? "Click 'Turn On Camera' to test Eye Contact, Facial Expression & Attire Etiquette." : "Klik 'Hidupkan Kamera' untuk menguji Eye Contact, Ekspresi Wajah & Etika Pemakaian.");
+            setTeks('t2-v-cap', isEN ? "Capture Snapshot & Auto-Stop Camera" : "Tangkap Gambar & Hentikan Kamera Automatik");
+            setTeks('t2-r-title', isEN ? "Q&A Simulation & Informal Slang Detector" : "Simulasi Soal Jawab & Pengesan Bahasa Rojak");
+            setTeks('t2-q-box-lbl', isEN ? "🎙️ AI Interviewer Questions:" : "🎙️ Soalan Penemuduga AI:");
+            setTeks('t2-ans-lbl', isEN ? "Your Answer (Type or Use Microphone)" : "Jawapan Anda (Taip atau Gunakan Mikrofon)");
+            setTeks('mic-text', isEN ? (sedangRakam ? "Stop Mic" : "Voice Mic") : (sedangRakam ? "Berhenti" : "Rakam Suara"));
+            setTeks('t2-sample-btn', isEN ? "Fill Sample Answer" : "Isi Contoh Jawapan");
+            document.getElementById('m2-jawapan').placeholder = isEN ? "Type your answer or click 'Voice Mic'..." : "Taip jawapan atau klik 'Rakam Suara'...";
+            setTeks('t2-m1', isEN ? "Word Count" : "Jumlah Perkataan");
+            setTeks('t2-m2', isEN ? "Filler Words" : "Filler Words");
+            setTeks('t2-m3', isEN ? "Speaking Pace" : "Kelajuan (WPM)");
+            setTeks('t2-submit', isEN ? "Submit Answer & Check STAR Report" : "Hantar Jawapan & Semak Laporan STAR");
+
+            // Tab 3
+            setTeks('t3-sub', isEN ? "Module 3A • Employability" : "Modul 3A • Kebolehpasaran");
+            setTeks('t3-title', isEN ? "Career Pathways, Certifications & Roadmap" : "Padanan Kerjaya, Sijil & Roadmap");
+            setTeks('t3-lbl1', isEN ? "Study Program" : "Program Pengajian KPTM AS");
+            setTeks('t3-lbl2', isEN ? "Existing Skills & Projects" : "Kemahiran & Projek Sedia Ada");
+            setTeks('t3-lbl3', isEN ? "Target Location Zone" : "Zon Lokasi Sasaran");
+            setTeks('t3-btn', isEN ? "Generate Complete 8-Section Career Plan" : "Jana Pelan Kerjaya & Sijil Lengkap");
+            setTeks('t3-res-title', isEN ? "Comprehensive Career, Certification & Portfolio Roadmap" : "Peta Laluan Kerjaya, Sijil & Projek Portfolio (8 Seksyen)");
+            setTeks('t3-empty-msg', isEN ? "Click the button on the left panel to generate tailored career pathways, internships, skills, certifications (Free vs Paid), and your career roadmap." : "Klik butang di sebelah kiri untuk menjana cadangan laluan kerjaya, peluang latihan industri, kemahiran, sijil (Percuma vs Berbayar), dan pelan pembangunan kerjaya mengikut bidang pengajian anda.");
+            setTeks('t3b-sub', isEN ? "Module 3B • Salary Negotiation Simulator" : "Modul 3B • Simulator Rundingan Gaji");
+            setTeks('t3b-title', isEN ? "💰 Salary & Allowance Negotiation with AI HR" : "💰 Rundingan Gaji & Elaun bersama AI HR");
+            setTeks('t3b-desc', isEN ? "Select a scenario and role, then click '1. Generate HR Offer'. AI HR will issue a realistic market offer before you negotiate!" : "Pilih situasi dan jawatan, kemudian klik '1. Jana Tawaran HR'. AI HR akan mengeluarkan surat tawaran awal mengikut pasaran sebelum anda mula berunding!");
+            setTeks('t3b-step1', isEN ? "Step 1: Get Official AI HR Offer" : "Langkah 1: Dapatkan Surat Tawaran AI HR");
+            setTeks('t3b-lbl1', isEN ? "Offer Scenario" : "Situasi Tawaran");
+            setTeks('opt-n1', isEN ? "🎓 Fresh Graduate Starting Salary" : "🎓 Gaji Permulaan Graduan Baharu (Fresh Graduate)");
+            setTeks('opt-n2', isEN ? "🏢 Internship Allowance & Transport" : "🏢 Elaun Latihan Industri (Internship) & Pengangkutan");
+            setTeks('opt-n3', isEN ? "🚀 Full-Time Conversion After Internship" : "🚀 Penyerapan Kerja Tetap Selepas Tamat Internship");
+            setTeks('t3b-lbl2', isEN ? "Applied Role" : "Jawatan Dipohon");
+            setTeks('t3b-btn1', isEN ? "1. Generate HR Offer (Market Logic)" : "1. Jana Tawaran HR (Ikut Logik Pasaran)");
+            setTeks('t3b-step2', isEN ? "Step 2: Submit Your Counter-Offer" : "Langkah 2: Kemukakan Rundingan Anda");
+            setTeks('t3b-lbl3', isEN ? "AI HR Initial Offer:" : "Tawaran Awal AI HR:");
+            setTeks('t3b-lbl4', isEN ? "Your Target Salary/Allowance:" : "Sasaran Gaji/Elaun Anda:");
+            setTeks('t3b-lbl5', isEN ? "Your Negotiation Pitch to HR" : "Ayat Rundingan Anda kepada HR");
+            setTeks('t3b-sample', isEN ? "Fill Sample Pitch" : "Isi Contoh Ayat");
+            document.getElementById('nego-hujah').placeholder = isEN ? "Type your justification and value proposition..." : "Taip alasan dan nilai tambah anda...";
+            setTeks('t3b-btn2', isEN ? "2. Submit Negotiation & View Golden Script" : "2. Hantar Rundingan & Semak Skrip Emas");
+            setTeks('t3b-right-title', isEN ? "AI HR Negotiation Table (Offer & Evaluation)" : "Meja Rundingan AI HR (Surat Tawaran & Penilaian)");
+            setTeks('t3b-offer-empty', isEN ? "Click '1. Generate HR Offer' on the left panel to receive your starting proposal." : "Klik butang '1. Jana Tawaran HR' di sebelah kiri untuk menerima surat tawaran awal daripada AI HR.");
+            setTeks('t3b-nego-empty', isEN ? "Click '2. Submit Negotiation' to view HR's decision and the Golden Counter-Offer Script." : "Klik '2. Hantar Rundingan' untuk melihat keputusan rundingan serta Skrip Rundingan Emas.");
+
+            // Tab 4
+            setTeks('t4-sub', isEN ? "Module 4 • Multimodal Job Tailor" : "Modul 4 • Multimodal Job Tailor");
+            setTeks('t4-title', isEN ? "Job Ad Tailor & Cover Letter / Email Generator" : "Penyesuai Iklan Kerja & Penjana Cover Letter / E-mel");
+            setTeks('t4-desc', isEN ? "Upload a job post screenshot OR paste the ad text. AI extracts the real job requirements, compares them with your profile, and writes a grounded Cover Letter & HR Email." : "Muat naik screenshot iklan jawatan kosong ATAU tampal teks iklan. AI akan mengekstrak syarat sebenar iklan, membandingkannya dengan profil anda, dan menulis Cover Letter serta E-mel tanpa menipu pengalaman.");
+            setTeks('t4-lbl1', isEN ? "1. Upload Job Ad Screenshot (Optional)" : "1. Muat Naik Tangkap Layar (Screenshot) Iklan Kerja (Pilihan)");
+            setTeks('t4-lbl2', isEN ? "2. Or Paste Job Advertisement Text" : "2. Atau Tampal (Copy-Paste) Teks Iklan Kerja");
+            setTeks('t4-sample', isEN ? "Fill Sample Job Ad" : "Isi Contoh Iklan");
+            document.getElementById('jm-teks').placeholder = isEN ? "Paste job advertisement text here..." : "Tampal teks iklan kerja di sini...";
+            setTeks('t4-lbl3', isEN ? "3. Your Actual Skills & Qualifications Summary" : "3. Ringkasan Kemahiran & Kelayakan Sebenar Anda");
+            setTeks('t4-btn', isEN ? "Analyze Match & Generate Application Documents" : "Analisis Keserasian & Jana Dokumen Permohonan");
+            setTeks('t4-r-title', isEN ? "Match Results & Ready-to-Send Documents" : "Keputusan Padanan & Dokumen Siap Hantar");
+            setTeks('t4-r-desc', isEN ? "If you are Logged In, your full name is automatically inserted into the Cover Letter & Email." : "Jika anda Log Masuk, nama penuh anda dimasukkan secara automatik ke dalam surat & e-mel.");
+            setTeks('t4-copy', isEN ? "Copy Text" : "Salin Teks");
+            setTeks('t4-empty1', isEN ? "No more generic bulk applications!" : "Tiada lagi permohonan pukal yang generik!");
+            setTeks('t4-empty2', isEN ? "Upload a job ad screenshot or paste the job requirements on the left panel." : "Muat naik screenshot iklan kerja atau tampal teks iklan di sebelah kiri.");
+
+            // Tab 5
+            setTeks('t5-sub', isEN ? "Module 5 • Workplace Readiness Simulator" : "Modul 5 • Workplace Readiness Simulator");
+            setTeks('t5-title', isEN ? "Work Coach: First-Week Job & Internship Simulation" : "Work Coach: Simulasi Minggu Pertama Kerja & Internship");
+            setTeks('t5-desc', isEN ? "Practice handling critical office scenarios so you are mentally prepared with proper corporate etiquette and conflict resolution." : "Latihan menghadapi situasi kritikal di pejabat supaya pelajar bersedia dari segi mental, adab komunikasi, dan penyelesaian konflik.");
+            setTeks('t5-lbl1', isEN ? "Select Real Workplace Scenario" : "Pilih Situasi Sebenar di Tempat Kerja");
+            setTeks('opt-wc1', isEN ? "😡 1. Replying to an Angry Client (System Bug)" : "😡 1. Membalas E-mel Klien yang Marah (Isu Sistem Ralat)");
+            setTeks('opt-wc2', isEN ? "🙋‍♂️ 2. Asking a Busy Supervisor for Help" : "🙋‍♂️ 2. Meminta Bantuan Penyelia (Supervisor) secara Profesional");
+            setTeks('opt-wc3', isEN ? "🗣️ 3. Voicing a Security Flaw in a Meeting" : "🗣️ 3. Etika Menegur / Memberi Cadangan dalam Mesyuarat");
+            setTeks('opt-wc4', isEN ? "⏰ 4. Communicating a Deadline Delay" : "⏰ 4. Menguruskan Kelewatan Tugasan (Deadline Management)");
+            tukarSenarioWorkCoach();
+            setTeks('t5-lbl2', isEN ? "Your Draft Reply / Action Plan" : "Draf Balasan / Tindakan Anda");
+            setTeks('t5-sample', isEN ? "Fill Sample Response" : "Isi Contoh Respon");
+            document.getElementById('wc-respon').placeholder = isEN ? "Type your email reply or action plan here..." : "Taip e-mel balasan atau tindakan anda...";
+            setTeks('t5-btn', isEN ? "Evaluate My Workplace Etiquette & Professionalism" : "Nilai Adab Kerja & Profesionalisme Saya");
+            setTeks('t5-r-title', isEN ? "AI Corporate Mentor Evaluation" : "Penilaian Mentor Korporat AI");
+            setTeks('t5-empty1', isEN ? "Ready to step into the real corporate world!" : "Sedia melangkah ke alam pekerjaan sebenar!");
+            setTeks('t5-empty2', isEN ? "Select a workplace scenario on the left and write your response. AI will evaluate your professionalism honestly and strictly." : "Pilih situasi tempat kerja di sebelah kiri dan tulis respon anda. AI akan menilai adab komunikasi dengan jujur dan tegas secara mendalam.");
+
+            // Modal Auth
+            setTeks('modal-login-title', isEN ? "Account Log In" : "Log Masuk Akaun");
+            setTeks('modal-login-desc', isEN ? "Logging in is optional. Once logged in, your full name will be automatically used in Cover Letters & HR emails." : "Apabila anda log masuk, nama penuh anda akan dimasukkan secara automatik ke dalam surat Cover Letter & draf e-mel.");
+            setTeks('modal-login-email-lbl', isEN ? "Email Address" : "Emel");
+            setTeks('modal-login-pass-lbl', isEN ? "Password" : "Kata Laluan");
+            setTeks('modal-login-btn', isEN ? "Log In Now" : "Log Masuk Sekarang");
+            setTeks('modal-no-acc', isEN ? "Don't have an account?" : "Belum ada akaun?");
+            setTeks('modal-goto-signup', isEN ? "Create New Account" : "Daftar Akaun Baharu");
+            setTeks('modal-reg-title', isEN ? "Create New Account" : "Daftar Akaun Baharu");
+            setTeks('modal-reg-name-lbl', isEN ? "Full Name (e.g., Ali bin Abu)" : "Nama Penuh (Contoh: Ali bin Abu)");
+            setTeks('modal-reg-email-lbl', isEN ? "Email Address" : "Emel");
+            setTeks('modal-reg-pass-lbl', isEN ? "Password (Min. 6 Characters)" : "Kata Laluan (Min. 6 Aksara)");
+            setTeks('modal-reg-course-lbl', isEN ? "Study Program" : "Program Pengajian");
+            setTeks('modal-reg-btn', isEN ? "Sign Up & Log In" : "Daftar & Terus Log Masuk");
+            setTeks('modal-has-acc', isEN ? "Already have an account?" : "Sudah ada akaun?");
+            setTeks('modal-goto-login', isEN ? "Log In Here" : "Log Masuk Sini");
+            setTeks('footer-text', isEN ? "Grad Ready AI • Graduate Employability & Career Readiness Ecosystem" : "Grad Ready AI • Ekosistem Kebolehpasaran & Kesediaan Kerjaya Graduan");
+        }
+
+        function bukaModalAuth() {
+            document.getElementById('authModal').classList.remove('hidden');
+            paparLoginForm();
+        }
+        function tutupModalAuth() {
+            document.getElementById('authModal').classList.add('hidden');
+        }
+        function paparDaftarForm() {
+            document.getElementById('loginFormContainer').classList.add('hidden');
+            document.getElementById('signupFormContainer').classList.remove('hidden');
+        }
+        function paparLoginForm() {
+            document.getElementById('signupFormContainer').classList.add('hidden');
+            document.getElementById('loginFormContainer').classList.remove('hidden');
+        }
+
+        // SINGKATAN PROFIL BULAT KEMAS ("ali bin abu" -> "AA", "qaisara bahira" -> "QB")
+        function dapatkanSingkatanNama(nama) {
+            if (!nama) return "U";
+            const abaikan = ["bin", "binti", "bt", "b", "a/l", "a/p", "de", "d", "of", "and", "the"];
+            const perkataan = nama.trim().split(/\s+/).filter(w => !abaikan.includes(w.toLowerCase()));
+            if (perkataan.length >= 2) {
+                return (perkataan[0][0] + perkataan[1][0]).toUpperCase();
+            } else if (perkataan.length === 1) {
+                return perkataan[0].substring(0, 2).toUpperCase();
+            }
+            return "U";
+        }
+
+        function bukaProfileMenu(e) {
+            if (e) e.stopPropagation();
+            const menu = document.getElementById('profile-dropdown-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function kemaskiniUIAutentikasi() {
+            const authSection = document.getElementById('auth-section');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            if (AKTIF_USER && AKTIF_USER.nama_penuh) {
+                const singkatan = dapatkanSingkatanNama(AKTIF_USER.nama_penuh);
+                const labelLogout = isEN ? 'Log Out' : 'Log Keluar';
+                const labelSignedAs = isEN ? 'Signed in as' : 'Log masuk sebagai';
+
+                authSection.innerHTML = `
+                    <div class="relative">
+                        <button onclick="bukaProfileMenu(event)" class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-teal-500 text-white font-extrabold text-xs flex items-center justify-center border-2 border-purple-300 shadow-lg transition transform active:scale-95" title="${AKTIF_USER.nama_penuh}">
+                            ${singkatan}
+                        </button>
+                        <div id="profile-dropdown-menu" class="absolute right-0 mt-2 w-56 glass-card !p-4 hidden z-50">
+                            <p class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted);">${labelSignedAs}</p>
+                            <p class="text-xs font-extrabold mt-0.5 truncate">${AKTIF_USER.nama_penuh}</p>
+                            <p class="text-[11px] font-semibold truncate mb-3" style="color: var(--accent-teal);">${AKTIF_USER.program_pengajian || 'Student'}</p>
+                            <div class="border-t pt-2.5" style="border-color: var(--glass-border);">
+                                <button onclick="prosesLogout()" class="w-full py-2 px-3 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-500 text-xs font-extrabold flex items-center justify-center gap-2 transition">
+                                    <i class="fa-solid fa-right-from-bracket"></i> <span>${labelLogout}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                const labelLogin = isEN ? 'Log In / Sign Up' : 'Log Masuk / Daftar';
+                authSection.innerHTML = `
+                    <button onclick="bukaModalAuth()" class="bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white px-4 py-2.5 rounded-xl text-xs font-extrabold shadow-lg shadow-purple-500/25 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-user-plus"></i> <span>${labelLogin}</span>
+                    </button>
+                `;
+            }
+        }
+
+        async function prosesLogin() {
+            const emel = document.getElementById('login-emel').value;
+            const katalaluan = document.getElementById('login-kata').value;
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ emel, katalaluan, lang: APP_LANGUAGE })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    alert(data.error || "Login failed.");
+                } else if (data.user) {
+                    AKTIF_USER = data.user;
+                    localStorage.setItem('aktif_user', JSON.stringify(AKTIF_USER));
+                    kemaskiniUIAutentikasi();
+                    tutupModalAuth();
+                }
+            } catch (err) {
+                alert(APP_LANGUAGE === 'EN' ? "Server connection error." : "Ralat sambungan pelayan.");
+            }
+        }
+
+        async function prosesSignUp() {
+            const nama = document.getElementById('reg-nama').value;
+            const emel = document.getElementById('reg-emel').value;
+            const katalaluan = document.getElementById('reg-kata').value;
+            const kursus = document.getElementById('reg-kursus').value;
+
+            try {
+                const res = await fetch('/api/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nama, emel, katalaluan, kursus, lang: APP_LANGUAGE })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    alert(data.error || "Sign up failed.");
+                } else if (data.user) {
+                    AKTIF_USER = data.user;
+                    localStorage.setItem('aktif_user', JSON.stringify(AKTIF_USER));
+                    kemaskiniUIAutentikasi();
+                    tutupModalAuth();
+                }
+            } catch (err) {
+                alert(APP_LANGUAGE === 'EN' ? "Server connection error." : "Ralat sambungan pelayan.");
+            }
+        }
+
+        function prosesLogout() {
+            AKTIF_USER = null;
+            localStorage.removeItem('aktif_user');
+            kemaskiniUIAutentikasi();
+        }
+
+        // ==============================================================================
+        // FUNGSI KESEMUA 5 MODUL AI (MENGHANTAR 'lang: APP_LANGUAGE' DENGAN TEPAT)
+        // ==============================================================================
+        async function hantarResume() {
+            const fileInput = document.getElementById('m1-file');
+            const jawatan = document.getElementById('m1-jawatan').value;
+            const hasilDiv = document.getElementById('m1-hasil');
+            const badge = document.getElementById('m1-skor-badge');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            if (!fileInput.files[0]) {
+                alert(isEN ? 'Please select your PDF resume file first!' : 'Sila pilih fail PDF resume anda terlebih dahulu!');
+                return;
+            }
+
+            badge.innerText = "-- / 100";
+            hasilDiv.innerHTML = `<div class="py-12 text-center font-bold animate-pulse" style="color: var(--accent-purple);"><i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i><p>${isEN ? 'Inspecting PDF visual layout, extracting text & running objective ATS rubric...' : 'Memeriksa susun atur visual PDF, mengekstrak teks & menjalankan rubrik objektif ATS...'}</p></div>`;
+
+            try {
+                const formData = new FormData();
+                formData.append('resume', fileInput.files[0]);
+                formData.append('jawatan', jawatan);
+                formData.append('nama_pelajar', AKTIF_USER ? AKTIF_USER.nama_penuh : '');
+                formData.append('lang', APP_LANGUAGE);
+
+                const res = await fetch('/api/analyze-resume', { method: 'POST', body: formData });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    paparKotakRalat('m1-hasil', data.error || 'Failed to analyze resume.', 'hantarResume');
+                    return;
+                }
+                badge.innerText = `${data.skor_ats} / 100`;
+                hasilDiv.innerHTML = marked.parse(data.laporan);
+            } catch (err) {
+                paparKotakRalat('m1-hasil', err.message, 'hantarResume');
+            }
+        }
+
+        async function janaSoalan() {
+            const jawatan = document.getElementById('m2-jawatan').value;
+            const personaSelect = document.getElementById('m2-persona');
+            const persona = personaSelect.options[personaSelect.selectedIndex].text;
+            const soalanDiv = document.getElementById('m2-soalan');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            soalanDiv.innerHTML = `<span class="font-semibold animate-pulse" style="color: var(--accent-purple);"><i class="fa-solid fa-spinner fa-spin mr-1"></i> ${isEN ? 'Generating structured interview questions...' : 'Menjana soalan temuduga berstruktur...'}</span>`;
+            try {
+                const res = await fetch('/api/generate-questions', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ jawatan, persona, lang: APP_LANGUAGE })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    paparKotakRalat('m2-soalan', data.error || 'Error generating questions.', 'janaSoalan');
+                    return;
+                }
+                soalanDiv.innerHTML = marked.parse(data.soalan);
+            } catch (err) {
+                paparKotakRalat('m2-soalan', err.message, 'janaSoalan');
+            }
+        }
+
+        function kiraMetrikPertuturan() {
+            const teks = document.getElementById('m2-jawapan').value;
+            if (!startTime && teks.length > 0) startTime = Date.now();
+            if (teks.trim().length === 0) startTime = null;
+
+            const words = teks.trim() ? teks.trim().split(/\s+/) : [];
+            const senaraiFiller = ['err', 'errr', 'aaa', 'aaaa', 'umm', 'uh', 'macam', 'actually', 'like', 'basically', 'kan', 'kot', 'cheq', 'hang', 'depa'];
+            let kiraan = 0;
+            let ditemui = {};
+
+            words.forEach(w => {
+                const bersih = w.toLowerCase().replace(/[.,!?]/g, '');
+                if (senaraiFiller.includes(bersih)) {
+                    kiraan++;
+                    ditemui[bersih] = (ditemui[bersih] || 0) + 1;
+                }
+            });
+
+            currentFillerCount = kiraan;
+            currentFillerDetails = Object.entries(ditemui).map(([k, v]) => `${k} (${v}x)`).join(', ');
+
+            const elapsedMinutes = startTime ? Math.max((Date.now() - startTime) / 60000, 0.15) : 0.2;
+            currentWPM = words.length > 0 ? Math.min(Math.round(words.length / elapsedMinutes), 185) : 0;
+
+            document.getElementById('live-words').innerText = `${words.length}`;
+            document.getElementById('live-fillers').innerText = `${kiraan}x`;
+            document.getElementById('live-filler-list').innerText = currentFillerDetails || '-';
+            document.getElementById('live-wpm').innerText = `${currentWPM} WPM`;
+        }
+
+        function isiContohJawapan() {
+            if (APP_LANGUAGE === 'EN') {
+                document.getElementById('m2-jawapan').value = "During my final semester project at KPTM, I was responsible for building a booking database in MySQL. When multiple users logged in simultaneously, queries slowed down. I added table indexing and refactored the PHP validation logic, which improved query speed significantly.";
+            } else {
+                document.getElementById('m2-jawapan').value = "Semasa membangunkan projek akhir di KPTM, saya ditugaskan membina pangkalan data MySQL. Apabila ramai pengguna mengakses sistem serentak, carian menjadi perlahan. Saya telah menambah indeks pada jadual utama dan mengoptimumkan kod PHP, sekaligus melancarkan semula operasi sistem.";
+            }
+            kiraMetrikPertuturan();
+        }
+
+        function toggleSpeech() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert(APP_LANGUAGE === 'EN' ? "Please use Google Chrome or Microsoft Edge for voice recognition." : "Sila gunakan Google Chrome atau Microsoft Edge untuk fungsi mikrofon.");
+                return;
+            }
+            if (!recognition) {
+                recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.onresult = (event) => {
+                    let transkrip = '';
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        transkrip += event.results[i][0].transcript + ' ';
+                    }
+                    const box = document.getElementById('m2-jawapan');
+                    box.value = (box.value + ' ' + transkrip).trim();
+                    kiraMetrikPertuturan();
+                };
+            }
+            const btnText = document.getElementById('mic-text');
+            if (!sedangRakam) {
+                recognition.lang = APP_LANGUAGE === 'EN' ? 'en-US' : 'ms-MY';
+                recognition.start();
+                sedangRakam = true;
+                btnText.innerText = APP_LANGUAGE === 'EN' ? "Stop Mic" : "Berhenti";
+            } else {
+                recognition.stop();
+                sedangRakam = false;
+                btnText.innerText = APP_LANGUAGE === 'EN' ? "Voice Mic" : "Rakam Suara";
+            }
+        }
+
+        async function nilaiJawapan() {
+            const jawatan = document.getElementById('m2-jawatan').value;
+            const soalan = document.getElementById('m2-soalan').innerText;
+            const jawapan = document.getElementById('m2-jawapan').value;
+            const outDiv = document.getElementById('m2-penilaian');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            if (!jawapan.trim()) {
+                alert(isEN ? 'Please type or record your answer first!' : 'Sila taip atau rakam jawapan anda terlebih dahulu!');
+                return;
+            }
+
+            outDiv.classList.remove('hidden');
+            outDiv.innerHTML = `<p class="font-bold animate-pulse" style="color: var(--accent-purple);"><i class="fa-solid fa-spinner fa-spin mr-1"></i> ${isEN ? 'Evaluating relevance, accuracy, STAR structure & delivery...' : 'Menilai kerelevanan, ketepatan teknikal, struktur STAR & penyampaian...'}</p>`;
+
+            try {
+                const res = await fetch('/api/evaluate-interview', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        jawatan,
+                        soalan,
+                        jawapan,
+                        wpm: currentWPM || 120,
+                        filler_count: currentFillerCount,
+                        filler_details: currentFillerDetails || 'None',
+                        lang: APP_LANGUAGE
+                    })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    paparKotakRalat('m2-penilaian', data.error || 'Evaluation failed.', 'nilaiJawapan');
+                    return;
+                }
+                outDiv.innerHTML = marked.parse(data.ulasan);
+            } catch (err) {
+                paparKotakRalat('m2-penilaian', err.message, 'nilaiJawapan');
+            }
+        }
+
+        async function bukaKamera() {
+            const video = document.getElementById('webcam-video');
+            const preview = document.getElementById('webcam-preview');
+            const placeholder = document.getElementById('webcam-placeholder');
+            const btnStart = document.getElementById('btn-start-cam');
+            const btnStop = document.getElementById('btn-stop-cam');
+
+            try {
+                kameraStream = await navigator.mediaDevices.getUserMedia({ video: { width: 480, height: 360 } });
+                video.srcObject = kameraStream;
+                video.classList.remove('hidden');
+                preview.classList.add('hidden');
+                placeholder.classList.add('hidden');
+                btnStart.classList.add('hidden');
+                btnStop.classList.remove('hidden');
+            } catch (err) {
+                alert(APP_LANGUAGE === 'EN' ? "Unable to access camera." : "Gagal mengakses kamera.");
+            }
+        }
+
+        function hentiKamera(tunjukPreview = false) {
+            const video = document.getElementById('webcam-video');
+            const preview = document.getElementById('webcam-preview');
+            const placeholder = document.getElementById('webcam-placeholder');
+            const statusText = document.getElementById('webcam-status-text');
+            const btnStart = document.getElementById('btn-start-cam');
+            const btnStop = document.getElementById('btn-stop-cam');
+
+            if (kameraStream) {
+                kameraStream.getTracks().forEach(track => track.stop());
+                kameraStream = null;
+            }
+            video.srcObject = null;
+            video.classList.add('hidden');
+
+            if (tunjukPreview) {
+                preview.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            } else {
+                preview.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+                statusText.innerText = APP_LANGUAGE === 'EN' ? "Camera stopped." : "Kamera telah dihentikan.";
+            }
+
+            btnStop.classList.add('hidden');
+            btnStart.classList.remove('hidden');
+        }
+
+        let lastCapturedImage = "";
+        async function analisisVision() {
+            const video = document.getElementById('webcam-video');
+            const preview = document.getElementById('webcam-preview');
+            const canvas = document.getElementById('webcam-canvas');
+            const outDiv = document.getElementById('m2-vision-output');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            if (!video.classList.contains('hidden')) {
+                canvas.width = 480;
+                canvas.height = 360;
+                canvas.getContext('2d').drawImage(video, 0, 0, 480, 360);
+                lastCapturedImage = canvas.toDataURL('image/jpeg', 0.65);
+                preview.src = lastCapturedImage;
+                hentiKamera(true);
+            } else if (!lastCapturedImage) {
+                alert(isEN ? "Please click 'Turn On Camera' first!" : "Sila klik 'Hidupkan Kamera' terlebih dahulu!");
+                return;
+            }
+
+            outDiv.classList.remove('hidden');
+            outDiv.innerHTML = `<span class="text-rose-500 font-bold animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> ${isEN ? 'Inspecting attire, grooming, posture & eye level...' : 'Memeriksa pakaian, kekemasan rambut, postur & aras mata...'}</span>`;
+
+            try {
+                const res = await fetch('/api/analyze-vision', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ image: lastCapturedImage, lang: APP_LANGUAGE })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    paparKotakRalat('m2-vision-output', data.error || 'Vision analysis failed.', 'analisisVision');
+                    return;
+                }
+                outDiv.innerHTML = marked.parse(data.laporan_vision);
+            } catch (err) {
+                paparKotakRalat('m2-vision-output', err.message, 'analisisVision');
+            }
+        }
+
+        // NAVBAR 3: PADANAN & RUNDINGAN GAJI
+        async function cariPadanan() {
+            const kursus = document.getElementById('m3-kursus').value;
+            const kemahiran = document.getElementById('m3-kemahiran').value;
+            const lokasi = document.getElementById('m3-lokasi').value;
+            const hasilDiv = document.getElementById('m3-hasil');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            hasilDiv.innerHTML = `<p class="font-bold animate-pulse" style="color: var(--accent-purple);"><i class="fa-solid fa-spinner fa-spin mr-1"></i> ${isEN ? 'Building your 8-section career, certification & portfolio roadmap...' : 'Membina pelan 8 seksyen laluan kerjaya, sijil & projek portfolio anda...'}</p>`;
+            try {
+                const res = await fetch('/api/match-job', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ kursus, kemahiran, lokasi, lang: APP_LANGUAGE })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    paparKotakRalat('m3-hasil', data.error || 'Failed to generate career matches.', 'cariPadanan');
+                    return;
+                }
+                hasilDiv.innerHTML = marked.parse(data.laporan);
+            } catch (err) {
+                paparKotakRalat('m3-hasil', err.message, 'cariPadanan');
+            }
+        }
+
+        async function janaTawaranHR() {
+            const jenisSelect = document.getElementById('nego-jenis');
+            const jenis_rundingan = jenisSelect.options[jenisSelect.selectedIndex].text;
+            const jawatan = document.getElementById('nego-jawatan').value;
+            const offerBox = document.getElementById('nego-offer-box');
+            const inputSemasa = document.getElementById('nego-semasa');
+            const inputSasaran = document.getElementById('nego-sasaran');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            offerBox.innerHTML = `<p class="font-bold animate-pulse m-0" style="color: var(--accent-purple);"><i class="fa-solid fa-spinner fa-spin mr-1"></i> ${isEN ? 'AI HR is preparing your official initial offer...' : 'AI HR sedang mengeluarkan surat tawaran awal...'}</p>`;
+
+            try {
+                const res = await fetch('/api/generate-hr-offer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ jenis_rundingan, jawatan, lang: APP_LANGUAGE })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    paparKotakRalat('nego-offer-box', data.error || 'Failed to generate HR offer.', 'janaTawaranHR');
+                    return;
+                }
+                inputSemasa.value = data.tawaran_ai;
+                inputSasaran.value = data.cadangan_sasaran;
+                offerBox.innerHTML = marked.parse(data.surat_tawaran);
+            } catch (err) {
+                paparKotakRalat('nego-offer-box', err.message, 'janaTawaranHR');
+            }
+        }
+
+        function isiContohNego() {
+            const tawaranAI = document.getElementById('nego-semasa').value;
+            const sasaran = document.getElementById('nego-sasaran').value;
+            if (APP_LANGUAGE === 'EN') {
+                document.getElementById('nego-hujah').value = `Thank you for the offer (${tawaranAI}). Given my practical project portfolio and readiness to contribute immediately with minimal training overhead, would the company consider adjusting the starting package to ${sasaran}?`;
+            } else {
+                document.getElementById('nego-hujah').value = `Terima kasih pihak HR atas surat tawaran (${tawaranAI}) ini. Berdasarkan portfolio projek praktikal yang telah saya siapkan serta kesediaan saya untuk terus menyumbang secara produktif dengan latihan penyeliaan yang minimum, adakah pihak syarikat terbuka untuk mempertimbangkan penyelarasan kepada ${sasaran}?`;
+            }
+        }
+
+        async function hantarRundinganGaji() {
+            const jenisSelect = document.getElementById('nego-jenis');
+            const jenis_rundingan = jenisSelect.options[jenisSelect.selectedIndex].text;
+            const jawatan = document.getElementById('nego-jawatan').value;
+            const tawaran_semasa = document.getElementById('nego-semasa').value;
+            const sasaran_pelajar = document.getElementById('nego-sasaran').value;
+            const hujah_pelajar = document.getElementById('nego-hujah').value;
+            const hasilDiv = document.getElementById('nego-hasil');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            if (!hujah_pelajar.trim()) {
+                alert(isEN ? "Please enter your negotiation pitch first!" : "Sila masukkan ayat rundingan anda terlebih dahulu!");
+                return;
+            }
+
+            hasilDiv.innerHTML = `<p class="font-bold animate-pulse" style="color: var(--accent-teal);"><i class="fa-solid fa-spinner fa-spin mr-1"></i> ${isEN ? 'AI HR is evaluating your negotiation pitch...' : 'AI HR sedang menilai hujah rundingan anda...'}</p>`;
+
+            try {
+                const res = await fetch('/api/negotiate-salary', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ jenis_rundingan, jawatan, tawaran_semasa, sasaran_pelajar, hujah_pelajar, lang: APP_LANGUAGE })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    paparKotakRalat('nego-hasil', data.error || 'Negotiation evaluation failed.', 'hantarRundinganGaji');
+                    return;
+                }
+                hasilDiv.innerHTML = marked.parse(data.hasil);
+            } catch (err) {
+                paparKotakRalat('nego-hasil', err.message, 'hantarRundinganGaji');
+            }
+        }
+
+        // NAVBAR 4: JOB MATCH
+        function isiContohIklan() {
+            if (APP_LANGUAGE === 'EN') {
+                document.getElementById('jm-teks').value = "Company: Kulim SmartTech Solutions Sdn Bhd\nRole: Junior Full-Stack Developer / IT Intern\nRequirements:\n- Diploma/Degree in Computer Science or IT.\n- Proficient in web development (PHP, MySQL, JavaScript) or mobile apps (Flutter).\n- Strong debugging and teamwork skills.";
+            } else {
+                document.getElementById('jm-teks').value = "Syarikat: Kulim SmartTech Solutions Sdn Bhd\nJawatan: Junior Full-Stack Developer / IT Intern\nLokasi: Kulim Hi-Tech Park / Alor Setar\nSyarat Kelayakan:\n- Diploma dalam Sains Komputer atau IT.\n- Mahir dalam pembangunan web (PHP, MySQL, JavaScript) atau aplikasi mudah alih (Flutter).\n- Berkebolehan menyelesaikan masalah pangkalan data dan bekerja dalam pasukan.";
+            }
+        }
+
+        async function prosesJobMatch() {
+            const imejInput = document.getElementById('jm-imej');
+            const teksIklan = document.getElementById('jm-teks').value;
+            const profilPelajar = document.getElementById('jm-profil').value;
+            const hasilDiv = document.getElementById('jm-hasil');
+            const badge = document.getElementById('jm-badge');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            if (!imejInput.files[0] && !teksIklan.trim()) {
+                alert(isEN ? "Please upload a job ad screenshot OR paste the job ad text first!" : "Sila muat naik gambar screenshot iklan kerja ATAU tampal teks iklan terlebih dahulu!");
+                return;
+            }
+
+            badge.innerText = "...";
+            hasilDiv.innerHTML = `<div class="py-12 text-center font-bold animate-pulse" style="color: var(--accent-purple);"><i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i><p>${isEN ? 'Executing 6-Step Job Extraction, Profile Comparison & Document Generation...' : 'Melaksanakan 6-Langkah Ekstraksi Iklan, Perbandingan Profil & Penjanaan Dokumen...'}</p></div>`;
+
+            try {
+                const formData = new FormData();
+                if (imejInput.files[0]) {
+                    formData.append('imej_iklan', imejInput.files[0]);
+                }
+                formData.append('teks_iklan', teksIklan);
+                formData.append('profil_pelajar', profilPelajar);
+                formData.append('nama_pelajar', AKTIF_USER ? AKTIF_USER.nama_penuh : '');
+                formData.append('lang', APP_LANGUAGE);
+
+                const res = await fetch('/api/job-tailor', { method: 'POST', body: formData });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    badge.innerText = "Error";
+                    paparKotakRalat('jm-hasil', data.error || 'Job matching failed.', 'prosesJobMatch');
+                    return;
+                }
+                badge.innerText = data.skor_padanan;
+                hasilDiv.innerHTML = marked.parse(data.hasil);
+            } catch (err) {
+                badge.innerText = "Error";
+                paparKotakRalat('jm-hasil', err.message, 'prosesJobMatch');
+            }
+        }
+
+        function salinDokumenJobMatch() {
+            const teks = document.getElementById('jm-hasil').innerText;
+            navigator.clipboard.writeText(teks);
+            alert(APP_LANGUAGE === 'EN' ? "Copied to clipboard!" : "Berjaya disalin ke Clipboard!");
+        }
+
+        // NAVBAR 5: WORK COACH
+        function tukarSenarioWorkCoach() {
+            const el = document.getElementById('wc-senario');
+            if (!el) return;
+            const kod = el.value;
+            const teksSenario = (WC_SCENARIOS[APP_LANGUAGE] && WC_SCENARIOS[APP_LANGUAGE][kod]) || WC_SCENARIOS['MY']['1'];
+            setTeks('wc-konteks', teksSenario);
+        }
+
+        function isiContohWorkCoach() {
+            if (APP_LANGUAGE === 'EN') {
+                document.getElementById('wc-respon').value = "Dear Sir, I sincerely apologize for the system bug that occurred earlier. I am currently investigating the database issue alongside my technical supervisor and will provide you with a complete status update before 2:00 PM today. Thank you for your patience.";
+            } else {
+                document.getElementById('wc-respon').value = "Selamat pagi Tuan. Saya memohon maaf atas masalah ralat sistem yang berlaku sebentar tadi. Saya sedang menyemak punca masalah pangkalan data tersebut bersama penyelia saya dan akan memaklumkan status perkembangan kepada pihak Tuan sebelum jam 2:00 petang ini. Terima kasih atas kesabaran Tuan.";
+            }
+        }
+
+        async function nilaiWorkCoach() {
+            const senario = document.getElementById('wc-konteks').innerText;
+            const respon_pelajar = document.getElementById('wc-respon').value;
+            const hasilDiv = document.getElementById('wc-hasil');
+            const isEN = APP_LANGUAGE === 'EN';
+
+            if (!respon_pelajar.trim()) {
+                alert(isEN ? "Please write your draft response first!" : "Sila tulis draf respon anda terlebih dahulu!");
+                return;
+            }
+
+            hasilDiv.innerHTML = `<div class="py-12 text-center text-amber-500 font-bold animate-pulse"><i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i><p>${isEN ? 'AI Work Coach is evaluating your response across all 5 etiquette dimensions...' : 'AI Work Coach sedang menilai respon anda merangkumi 5 dimensi etika profesional...'}</p></div>`;
+
+            try {
+                const res = await fetch('/api/work-coach', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ senario, respon_pelajar, lang: APP_LANGUAGE })
+                });
+                const data = await res.json();
+                if (!res.ok || data.error) {
+                    paparKotakRalat('wc-hasil', data.error || 'Work Coach evaluation failed.', 'nilaiWorkCoach');
+                    return;
+                }
+                hasilDiv.innerHTML = marked.parse(data.hasil);
+            } catch (err) {
+                paparKotakRalat('wc-hasil', err.message, 'nilaiWorkCoach');
+            }
+        }
+    </script>
+</body>
+</html>
