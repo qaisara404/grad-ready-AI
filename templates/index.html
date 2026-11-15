@@ -253,8 +253,8 @@
         .switch {
             position: relative;
             display: inline-block;
-            width: 52px;
-            height: 28px;
+            width: 44px;
+            height: 22px;
         }
 
         .switch input {
@@ -280,10 +280,10 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 3px;
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 2px;
             background: white;
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 50%;
@@ -297,7 +297,7 @@
 
         input:checked + .slider:before {
             content: "☀️";
-            transform: translateX(24px);
+            transform: translateX(20px);
             background: #FFFBEB;
         }
 
@@ -356,79 +356,85 @@
     <!-- 🌸 SOFT PINK GRADIENT CURSOR AURA -->
     <div class="cursor-glow" id="cursor-glow"></div>
 
-    <!-- TOP HERO HEADER (Tanpa badge iGEN 2027 • KPTM AS) -->
-    <header class="top-header-shell shadow-lg">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col lg:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-600 to-teal-500 flex items-center justify-center text-2xl text-white shadow-lg shadow-purple-500/30">
+        <!-- TOP HERO HEADER (COMPACT & SLEEK) -->
+    <header class="top-header-shell shadow-lg sticky top-0 z-50">
+        <!-- Rapatkan padding dari py-5 ke py-2.5 -->
+        <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <!-- Mengecilkan kotak ikon dari w-12 h-12 ke w-9 h-9 -->
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-teal-500 flex items-center justify-center text-lg text-white shadow-lg shadow-purple-500/25 shrink-0">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-extrabold tracking-tight" style="font-family: 'Sora', sans-serif; background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Grad Ready AI</h1>
-                    <p class="text-xs mt-0.5" style="color: var(--text-muted);" id="header-desc">Inclusive AI Interview, Job Tailor & Workplace Coach for Future Graduates</p>
+                    <!-- Saiz text tajuk kekal, tetapi rapatkan margin -->
+                    <h1 class="text-xl font-extrabold tracking-tight leading-none" style="font-family: 'Sora', sans-serif; background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Grad Ready AI</h1>
+                    <p class="text-[10px] mt-0.5" style="color: var(--text-muted);" id="header-desc">Inclusive AI Interview, Job Tailor & Workplace Coach for Future Graduates</p>
                 </div>
             </div>
 
-            <!-- CONTROLS: DROPDOWN BAHASA, CAPSULE SLIDER TEMA & PROFIL BULAT -->
-            <div class="flex flex-wrap items-center gap-3.5">
-                <!-- 1. Dropdown Bahasa (Bendera MY & US) -->
+            <!-- CONTROLS: Susun secara horizontal rapat (py-1.5) -->
+            <div class="flex flex-wrap items-center gap-2.5">
+                <!-- Dropdown Bahasa (Compact) -->
                 <div class="relative" id="lang-dropdown-wrapper">
-                    <button onclick="toggleLangDropdown(event)" class="inner-box !py-2 !px-3.5 text-xs font-bold flex items-center gap-2 cursor-pointer hover:border-purple-500">
-                        <img id="current-lang-flag" src="https://flagcdn.com/w20/my.png" class="w-4 h-3 rounded-sm object-cover" alt="Flag">
+                    <button onclick="toggleLangDropdown(event)" class="inner-box !py-1.5 !px-3 text-[11px] font-bold flex items-center gap-1.5 cursor-pointer hover:border-purple-500">
+                        <img id="current-lang-flag" src="https://flagcdn.com/w20/my.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="Flag">
                         <span id="current-lang-label">Bahasa Melayu</span>
-                        <i class="fa-solid fa-chevron-down text-[10px]" style="color: var(--text-muted);"></i>
+                        <i class="fa-solid fa-chevron-down text-[8px]" style="color: var(--text-muted);"></i>
                     </button>
-                    <div id="lang-dropdown-menu" class="absolute right-0 mt-2 w-44 glass-card !p-2 hidden z-50">
-                        <button onclick="pilihBahasa('MY')" class="w-full px-3 py-2 rounded-lg text-left text-xs font-bold hover:bg-purple-500/15 flex items-center gap-2.5 transition">
-                            <img src="https://flagcdn.com/w20/my.png" class="w-4 h-3 rounded-sm object-cover" alt="MY">
+                    <div id="lang-dropdown-menu" class="absolute right-0 mt-1 w-40 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-1 hidden z-50">
+                        <button onclick="pilihBahasa('MY')" class="w-full px-2.5 py-1.5 rounded-lg text-left text-[11px] font-bold hover:bg-purple-500/15 flex items-center gap-2 transition">
+                            <img src="https://flagcdn.com/w20/my.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="MY">
                             <span>🇲🇾 Bahasa Melayu</span>
                         </button>
-                        <button onclick="pilihBahasa('EN')" class="w-full px-3 py-2 rounded-lg text-left text-xs font-bold hover:bg-purple-500/15 flex items-center gap-2.5 transition mt-1">
-                            <img src="https://flagcdn.com/w20/us.png" class="w-4 h-3 rounded-sm object-cover" alt="US">
+                        <button onclick="pilihBahasa('EN')" class="w-full px-2.5 py-1.5 rounded-lg text-left text-[11px] font-bold hover:bg-purple-500/15 flex items-center gap-2 transition mt-0.5">
+                            <img src="https://flagcdn.com/w20/us.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="US">
                             <span>🇺🇸 English (US)</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- 2. Capsule Pill Slider (Dark / Light Mode) -->
-                <div class="theme-switch-wrapper">
-                    <span class="text-[11px] font-extrabold tracking-wider" style="color: var(--text-secondary);" id="theme-text-label">MOD GELAP</span>
-                    <label class="switch" title="Tukar Mod Gelap / Mod Cerah">
+                <!-- Capsule Pill Slider (Lebih nipis) -->
+                <div class="theme-switch-wrapper !py-1 !px-2.5">
+                    <span class="text-[9px] font-extrabold tracking-wider" style="color: var(--text-secondary);" id="theme-text-label">MOD GELAP</span>
+                    <label class="switch !w-10 !h-6">
                         <input type="checkbox" id="theme-toggle">
-                        <span class="slider"></span>
+                        <span class="slider !rounded-full"></span>
                     </label>
                 </div>
 
-                <!-- 3. Seksyen Login / Profil Bulat ("AA", "QB", "NN") -->
+                <!-- Profile Bulat (Mengecilkan butang login/avatar sedikit) -->
                 <div id="auth-section" class="relative">
-                    <button onclick="bukaModalAuth()" class="bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white px-4 py-2.5 rounded-xl text-xs font-extrabold shadow-lg shadow-purple-500/25 transition flex items-center gap-1.5">
+                    <button onclick="bukaModalAuth()" class="bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white px-3.5 py-2 rounded-xl text-[11px] font-extrabold shadow-lg shadow-purple-500/20 transition flex items-center gap-1">
                         <i class="fa-solid fa-user-plus"></i> <span id="btn-login-text">Log Masuk / Daftar</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- 5 NAVBAR MODEN (Tanpa Nombor 1,2,3,4,5 di depan) -->
-        <div class="max-w-7xl mx-auto px-6 pb-4">
-            <nav class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 nav-bar-shell p-2 rounded-2xl">
-                <button onclick="bukaTab('tab-resume')" id="btn-tab-resume" class="nav-btn nav-btn-active py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-file-shield"></i> <span id="nav-1">Imbasan Resume</span>
+        <!-- 5 NAVBAR MODEN (SAIZ TULISAN DIUBAH KE 13PX UNTUK LEBIH JELAS) -->
+        <div class="max-w-7xl mx-auto px-6 pb-2.5">
+            <nav class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1.5 nav-bar-shell p-1 rounded-xl">
+                <!-- text-xs digantikan dengan text-[13px] pada kelima-lima butang di bawah -->
+                <button onclick="bukaTab('tab-resume')" id="btn-tab-resume" class="nav-btn nav-btn-active py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-file-shield text-[12px]"></i> <span id="nav-1">Imbasan Resume</span>
                 </button>
-                <button onclick="bukaTab('tab-temuduga')" id="btn-tab-temuduga" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-microphone-lines"></i> <span id="nav-2">Temuduga & Vision</span>
+                <button onclick="bukaTab('tab-temuduga')" id="btn-tab-temuduga" class="nav-btn py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-microphone-lines text-[12px]"></i> <span id="nav-2">Temuduga & Vision</span>
                 </button>
-                <button onclick="bukaTab('tab-padanan')" id="btn-tab-padanan" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-compass"></i> <span id="nav-3">Padanan & Gaji</span>
+                <button onclick="bukaTab('tab-padanan')" id="btn-tab-padanan" class="nav-btn py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-compass text-[12px]"></i> <span id="nav-3">Padanan & Gaji</span>
                 </button>
-                <button onclick="bukaTab('tab-jobmatch')" id="btn-tab-jobmatch" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="nav-4">Job Match</span>
+                <button onclick="bukaTab('tab-jobmatch')" id="btn-tab-jobmatch" class="nav-btn py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-wand-magic-sparkles text-[12px]"></i> <span id="nav-4">Job Match</span>
                 </button>
-                <button onclick="bukaTab('tab-workcoach')" id="btn-tab-workcoach" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-briefcase"></i> <span id="nav-5">Work Coach</span>
+                <button onclick="bukaTab('tab-workcoach')" id="btn-tab-workcoach" class="nav-btn py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-briefcase text-[12px]"></i> <span id="nav-5">Work Coach</span>
                 </button>
             </nav>
         </div>
+
     </header>
+
 
     <!-- MAIN CONTENT -->
     <main class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full">
@@ -842,9 +848,11 @@
     </main>
 
     <!-- FOOTER ASAL YANG KEMAS & MINIMALIS -->
-    <footer class="top-header-shell border-t py-4 px-6 text-center text-xs" style="color: var(--text-muted); border-color: var(--glass-border);" id="footer-text">
-        Grad Ready AI • Ekosistem Kebolehpasaran & Kesediaan Kerjaya Graduan
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-4 px-6 text-center text-xs text-slate-500" id="footer-text">
+        &copy; 2027 Grad Ready AI • Inclusive AI Career Coach Bridging Campus to Industry
     </footer>
+
+
 
     <!-- ⬆️ FLOATING ROUNDED BACK TO TOP BUTTON -->
     <button class="btn-back-to-top" id="btn-back-to-top" onclick="scrollToTop()" title="Kembali ke Atas">
@@ -864,7 +872,7 @@
                 <p class="text-xs leading-relaxed" style="color: var(--text-muted);" id="modal-login-desc">Apabila anda log masuk, nama penuh anda akan dimasukkan secara automatik ke dalam surat Cover Letter & draf e-mel.</p>
                 <div>
                     <label class="theme-label" id="modal-login-email-lbl">Emel</label>
-                    <input type="email" id="login-emel" placeholder="jlopez@gmail.com" class="theme-input">
+                    <input type="email" id="login-emel" placeholder="ali@gmail.com" class="theme-input">
                 </div>
                 <div>
                     <label class="theme-label" id="modal-login-pass-lbl">Kata Laluan</label>
@@ -883,7 +891,7 @@
                 </div>
                 <div>
                     <label class="theme-label" id="modal-reg-email-lbl">Emel</label>
-                    <input type="email" id="reg-emel" placeholder="ali@kptm.edu.my" class="theme-input">
+                    <input type="email" id="reg-emel" placeholder="ali@gmail.com" class="theme-input">
                 </div>
                 <div>
                     <label class="theme-label" id="modal-reg-pass-lbl">Kata Laluan (Min. 6 Aksara)</label>
@@ -1256,7 +1264,8 @@
             setTeks('modal-reg-btn', isEN ? "Sign Up & Log In" : "Daftar & Terus Log Masuk");
             setTeks('modal-has-acc', isEN ? "Already have an account?" : "Sudah ada akaun?");
             setTeks('modal-goto-login', isEN ? "Log In Here" : "Log Masuk Sini");
-            setTeks('footer-text', isEN ? "Grad Ready AI • Graduate Employability & Career Readiness Ecosystem" : "Grad Ready AI • Ekosistem Kebolehpasaran & Kesediaan Kerjaya Graduan");
+            setTeks('footer-text', isEN ? "© 2027 Grad Ready AI • Inclusive AI Career Coach Bridging Campus to Industry" : "© 2027 Grad Ready AI • Jurulatih Kerjaya AI Inklusif Menghubungkan Kampus ke Industri");
+
         }
 
         function bukaModalAuth() {
