@@ -22,9 +22,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
-    <!-- 💎 ENTERPRISE GALAXY DESIGN SYSTEM (DARK & LIGHT MODE SEimbang 100%) -->
+    <!-- 💎 ENTERPRISE GALAXY DESIGN SYSTEM (DARK & LIGHT MODE SEimbang 100% + Accessibility Controls) -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=Source+Code+Pro:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;600;700;800&family=Source+Code+Pro:wght@400;600;700&family=Lexend:wght@300;400;500;600;700;800&display=swap');
 
         :root {
             /* 🌌 DARK THEME: LUMA GALAXY VIOLET WITH SUBTLE HINT OF TEAL */
@@ -53,6 +53,9 @@
             
             --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
             --hover-shadow-mewah: 0 16px 40px -8px rgba(168, 85, 247, 0.45), 0 0 25px rgba(20, 184, 166, 0.25);
+
+            /* Default font sizes (Dynamic scale) */
+            --base-font-scale: 1;
         }
 
         html[data-theme="light"] {
@@ -84,9 +87,65 @@
             --hover-shadow-mewah: 0 20px 35px -5px rgba(124, 58, 237, 0.2), 0 0 18px rgba(13, 148, 136, 0.16);
         }
 
+        /* ♿ ACCESSIBILITY MODE: HIGH CONTRAST STATE */
+        html.high-contrast {
+            --bg-gradient: none !important;
+            background: #000000 !important;
+            --header-bg: #000000 !important;
+            --nav-bar-bg: #111111 !important;
+            --glass-bg: #000000 !important;
+            --glass-border: #FFFFFF !important;
+            --inner-box-bg: #111111 !important;
+            --inner-box-border: #FFFFFF !important;
+            --input-bg: #000000 !important;
+            --input-border: #FFFFFF !important;
+            --text-primary: #FFFFFF !important;
+            --text-secondary: #FFFF00 !important; /* High contrast yellow */
+            --text-muted: #FFFFFF !important;
+            --accent-purple: #FFFF00 !important;
+            --accent-teal: #00FFFF !important;
+            --accent-success: #00FF00 !important;
+            --accent-danger: #FF0000 !important;
+        }
+
+        html[data-theme="light"].high-contrast {
+            background: #FFFFFF !important;
+            --header-bg: #FFFFFF !important;
+            --nav-bar-bg: #F1F5F9 !important;
+            --glass-bg: #FFFFFF !important;
+            --glass-border: #000000 !important;
+            --inner-box-bg: #F8FAFC !important;
+            --inner-box-border: #000000 !important;
+            --input-bg: #FFFFFF !important;
+            --input-border: #000000 !important;
+            --text-primary: #000000 !important;
+            --text-secondary: #0000FF !important; /* High contrast blue */
+            --text-muted: #000000 !important;
+            --accent-purple: #0000FF !important;
+            --accent-teal: #008080 !important;
+            --accent-success: #008000 !important;
+            --accent-danger: #FF0000 !important;
+        }
+
+        /* ♿ DYSLEXIA-FRIENDLY FONT SYSTEM */
+        html.dyslexic-font * {
+            font-family: 'Lexend', sans-serif !important;
+        }
+
+        /* ♿ REDUCE ANIMATIONS & MOTION SENSITIVITY */
+        html.reduce-motion * {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+        }
+        html.reduce-motion .cursor-glow {
+            display: none !important;
+        }
+
         * {
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: calc(1em * var(--base-font-scale));
         }
 
         body {
@@ -117,10 +176,12 @@
         .nav-btn {
             color: var(--text-secondary);
         }
+
         .nav-btn:hover {
             color: var(--text-primary);
             background: rgba(168, 85, 247, 0.12);
         }
+
         .nav-btn-active {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)) !important;
             color: #FFFFFF !important;
@@ -186,15 +247,18 @@
             width: 100%;
             transition: all 0.25s ease;
         }
+
         .theme-input:focus {
             outline: none;
             border-color: var(--accent-teal) !important;
             box-shadow: 0 0 12px rgba(20, 184, 166, 0.28);
         }
+
         .theme-input option {
             background: var(--glass-bg);
             color: var(--text-primary);
         }
+
         html[data-theme="light"] .theme-input option {
             background: #FFFFFF;
             color: #0F172A;
@@ -239,22 +303,23 @@
             50% { border-color: transparent; }
         }
 
-        /* 🔘 CAPSULE TOGGLE SWITCH (PILL SLIDER) */
+        /* 🔘 CAPSULE TOGGLE SWITCH (PILL SLIDER - SYMMETRIC COMPACT FIT) */
         .theme-switch-wrapper {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 5px 12px;
+            gap: 8px;
+            padding: 4px 10px;
             background: var(--inner-box-bg);
             border: 1px solid var(--glass-border);
             border-radius: 30px;
+            transition: all 0.3s ease;
         }
 
         .switch {
             position: relative;
             display: inline-block;
-            width: 52px;
-            height: 28px;
+            width: 44px; /* Lebar Kapsul */
+            height: 22px; /* Tinggi Kapsul */
         }
 
         .switch input {
@@ -267,27 +332,30 @@
             position: absolute;
             cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, #1e1b4b, #042f2e);
+            background: linear-gradient(135deg, #1a0f30, #041d24);
             border: 1px solid var(--accent-purple);
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 34px;
         }
 
+        /* BULATAN SEBELUM BERTUKAR (MOD GELAP - BULAN 🌙) */
         .slider:before {
             position: absolute;
             content: "🌙";
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
-            height: 20px;
-            width: 20px;
-            left: 4px;
-            bottom: 3px;
-            background: white;
+            font-size: 10px; /* Saiz Font Bulan dioptimumkan */
+            height: 16px; /* Diameter Bulat */
+            width: 16px;  /* Diameter Bulat */
+            left: 2px;    /* Kedudukan asal kiri */
+            top: 50%;
+            transform: translateY(-50%); /* Sentiasa terapung tepat di tengah secara menegak */
+            background: #FFFFFF;
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 50%;
             box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            line-height: 1;
         }
 
         input:checked + .slider {
@@ -295,10 +363,27 @@
             border-color: #0d9488;
         }
 
+        /* BULATAN SELEPAS BERTUKAR (MOD TERANG - MATAHARI ☀️) */
         input:checked + .slider:before {
             content: "☀️";
-            transform: translateX(24px);
+            font-size: 10px; /* Saiz Font Matahari dioptimumkan */
+            /* Bergerak secara simetri dari kiri (2px) ke kanan (22px) tanpa terkeluar sempadan */
+            transform: translateY(-50%) translateX(22px); 
             background: #FFFBEB;
+            box-shadow: 0 2px 6px rgba(251, 191, 36, 0.4);
+        }
+
+        /* ♿ KEKEMASAN BUTANG PANEL AKSESIBILITI MENGIKUT TEMA WARNA AKTIF */
+        #access-dropdown-menu button {
+            transition: all 0.25s ease;
+        }
+        /* Memastikan butang tidak aktif berwarna kelabu cerah/gelap mengikut tema */
+        #access-dropdown-menu .btn-inactive {
+            background: transparent;
+            color: var(--text-primary) !important;
+        }
+        #access-dropdown-menu .btn-inactive:hover {
+            background: rgba(168, 85, 247, 0.15);
         }
 
         /* TIPOGRAFI PROSE KEMAS & TERATUR */
@@ -356,75 +441,124 @@
     <!-- 🌸 SOFT PINK GRADIENT CURSOR AURA -->
     <div class="cursor-glow" id="cursor-glow"></div>
 
-    <!-- TOP HERO HEADER (Tanpa badge iGEN 2027 • KPTM AS) -->
-    <header class="top-header-shell shadow-lg">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col lg:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-600 to-teal-500 flex items-center justify-center text-2xl text-white shadow-lg shadow-purple-500/30">
+    <!-- TOP HERO HEADER (COMPACT & SLEEK + ADAPTED FOR ACCESSIBILITY IN HEADER) -->
+    <header class="top-header-shell shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col lg:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-teal-500 flex items-center justify-center text-lg text-white shadow-lg shadow-purple-500/25 shrink-0">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-extrabold tracking-tight" style="font-family: 'Sora', sans-serif; background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Grad Ready AI</h1>
-                    <p class="text-xs mt-0.5" style="color: var(--text-muted);" id="header-desc">Inclusive AI Interview, Job Tailor & Workplace Coach for Future Graduates</p>
+                    <h1 class="text-xl font-extrabold tracking-tight leading-none" style="font-family: 'Sora', sans-serif; background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Grad Ready AI</h1>
+                    <p class="text-[10px] mt-0.5" style="color: var(--text-muted);" id="header-desc">Inclusive AI Interview, Job Tailor & Workplace Coach for Future Graduates</p>
                 </div>
             </div>
 
-            <!-- CONTROLS: DROPDOWN BAHASA, CAPSULE SLIDER TEMA & PROFIL BULAT -->
-            <div class="flex flex-wrap items-center gap-3.5">
-                <!-- 1. Dropdown Bahasa (Bendera MY & US) -->
-                <div class="relative" id="lang-dropdown-wrapper">
-                    <button onclick="toggleLangDropdown(event)" class="inner-box !py-2 !px-3.5 text-xs font-bold flex items-center gap-2 cursor-pointer hover:border-purple-500">
-                        <img id="current-lang-flag" src="https://flagcdn.com/w20/my.png" class="w-4 h-3 rounded-sm object-cover" alt="Flag">
-                        <span id="current-lang-label">Bahasa Melayu</span>
-                        <i class="fa-solid fa-chevron-down text-[10px]" style="color: var(--text-muted);"></i>
+            <!-- CONTROLS: ACCESSIBILITY PANEL DROPDOWN ADDED RIGHT IN HEADER NEXT TO LANG -->
+            <div class="flex flex-wrap items-center gap-2.5">
+                
+                <!-- ♿ PREMIUM ACCESSIBILITY DROPDOWN PANEL -->
+                <div class="relative" id="access-dropdown-wrapper">
+                    <button onclick="toggleAccessDropdown(event)" class="inner-box !py-1.5 !px-3 text-[11px] font-bold flex items-center gap-1.5 cursor-pointer hover:border-purple-500">
+                        <i class="fa-solid fa-universal-access text-indigo-400"></i>
+                        <span id="access-btn-label">Aksesibiliti</span>
+                        <i class="fa-solid fa-chevron-down text-[8px]" style="color: var(--text-muted);"></i>
                     </button>
-                    <div id="lang-dropdown-menu" class="absolute right-0 mt-2 w-44 glass-card !p-2 hidden z-50">
-                        <button onclick="pilihBahasa('MY')" class="w-full px-3 py-2 rounded-lg text-left text-xs font-bold hover:bg-purple-500/15 flex items-center gap-2.5 transition">
-                            <img src="https://flagcdn.com/w20/my.png" class="w-4 h-3 rounded-sm object-cover" alt="MY">
+                    <div id="access-dropdown-menu" class="absolute right-0 mt-1 w-60 glass-card !p-4 hidden z-50 space-y-3.5 shadow-2xl animate-fade-in">
+                        <!-- Text Resizer A- / A / A+ -->
+                        <div class="space-y-1.5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider block" style="color: var(--text-muted);" id="lbl-text-size">Saiz Teks</span>
+                            <div class="grid grid-cols-3 gap-1 bg-slate-900/40 dark:bg-slate-950/40 p-1 rounded-lg border border-purple-500/10">
+                                <button onclick="larasSaizTeks('kecil')" class="py-1 text-xs font-bold rounded hover:bg-purple-600/25 text-center">A-</button>
+                                <button onclick="larasSaizTeks('normal')" class="py-1 text-xs font-bold rounded bg-purple-600 text-white text-center">A</button>
+                                <button onclick="larasSaizTeks('besar')" class="py-1 text-xs font-bold rounded hover:bg-purple-600/25 text-center">A+</button>
+                            </div>
+                        </div>
+
+                        <!-- High Contrast Switch -->
+                        <div class="flex items-center justify-between border-t border-purple-500/10 pt-2.5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted);" id="lbl-contrast">Kontras Tinggi</span>
+                            <label class="switch">
+                                <input type="checkbox" id="access-contrast-toggle" onchange="toggleKontrasTinggi()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <!-- Dyslexia Font Switch -->
+                        <div class="flex items-center justify-between border-t border-purple-500/10 pt-2.5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted);" id="lbl-dyslexic">Mesra Disleksia</span>
+                            <label class="switch">
+                                <input type="checkbox" id="access-dyslexic-toggle" onchange="toggleFontDisleksia()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <!-- Reduce Motion Switch -->
+                        <div class="flex items-center justify-between border-t border-purple-500/10 pt-2.5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted);" id="lbl-motion">Kurangkan Animasi</span>
+                            <label class="switch">
+                                <input type="checkbox" id="access-motion-toggle" onchange="toggleKurangkanAnimasi()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dropdown Bahasa (Compact) -->
+                <div class="relative" id="lang-dropdown-wrapper">
+                    <button onclick="toggleLangDropdown(event)" class="inner-box !py-1.5 !px-3 text-[11px] font-bold flex items-center gap-1.5 cursor-pointer hover:border-purple-500">
+                        <img id="current-lang-flag" src="https://flagcdn.com/w20/my.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="Flag">
+                        <span id="current-lang-label">Bahasa Melayu</span>
+                        <i class="fa-solid fa-chevron-down text-[8px]" style="color: var(--text-muted);"></i>
+                    </button>
+                    <div id="lang-dropdown-menu" class="absolute right-0 mt-1 w-40 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-1 hidden z-50">
+                        <button onclick="pilihBahasa('MY')" class="w-full px-2.5 py-1.5 rounded-lg text-left text-[11px] font-bold hover:bg-purple-500/15 flex items-center gap-2 transition">
+                            <img src="https://flagcdn.com/w20/my.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="MY">
                             <span>🇲🇾 Bahasa Melayu</span>
                         </button>
-                        <button onclick="pilihBahasa('EN')" class="w-full px-3 py-2 rounded-lg text-left text-xs font-bold hover:bg-purple-500/15 flex items-center gap-2.5 transition mt-1">
-                            <img src="https://flagcdn.com/w20/us.png" class="w-4 h-3 rounded-sm object-cover" alt="US">
+                        <button onclick="pilihBahasa('EN')" class="w-full px-2.5 py-1.5 rounded-lg text-left text-[11px] font-bold hover:bg-purple-500/15 flex items-center gap-2 transition mt-0.5">
+                            <img src="https://flagcdn.com/w20/us.png" class="w-3.5 h-2.5 rounded-sm object-cover" alt="US">
                             <span>🇺🇸 English (US)</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- 2. Capsule Pill Slider (Dark / Light Mode) -->
+                <!-- Capsule Pill Slider -->
                 <div class="theme-switch-wrapper">
-                    <span class="text-[11px] font-extrabold tracking-wider" style="color: var(--text-secondary);" id="theme-text-label">MOD GELAP</span>
-                    <label class="switch" title="Tukar Mod Gelap / Mod Cerah">
+                    <span class="text-[9px] font-extrabold tracking-wider" style="color: var(--text-secondary);" id="theme-text-label">MOD GELAP</span>
+                    <label class="switch">
                         <input type="checkbox" id="theme-toggle">
                         <span class="slider"></span>
                     </label>
                 </div>
 
-                <!-- 3. Seksyen Login / Profil Bulat ("AA", "QB", "NN") -->
+                <!-- Profile Bulat (Mengecilkan butang login/avatar sedikit) -->
                 <div id="auth-section" class="relative">
-                    <button onclick="bukaModalAuth()" class="bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white px-4 py-2.5 rounded-xl text-xs font-extrabold shadow-lg shadow-purple-500/25 transition flex items-center gap-1.5">
+                    <button onclick="bukaModalAuth()" class="bg-gradient-to-r from-purple-600 to-teal-500 hover:from-purple-500 hover:to-teal-400 text-white px-3.5 py-2 rounded-xl text-[11px] font-extrabold shadow-lg shadow-purple-500/20 transition flex items-center gap-1">
                         <i class="fa-solid fa-user-plus"></i> <span id="btn-login-text">Log Masuk / Daftar</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- 5 NAVBAR MODEN (Tanpa Nombor 1,2,3,4,5 di depan) -->
-        <div class="max-w-7xl mx-auto px-6 pb-4">
-            <nav class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 nav-bar-shell p-2 rounded-2xl">
-                <button onclick="bukaTab('tab-resume')" id="btn-tab-resume" class="nav-btn nav-btn-active py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-file-shield"></i> <span id="nav-1">Imbasan Resume</span>
+        <!-- 5 NAVBAR MODEN (SAIZ TULISAN DIUBAH KE 13PX UNTUK LEBIH JELAS) -->
+        <div class="max-w-7xl mx-auto px-6 pb-2.5">
+            <nav class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1.5 nav-bar-shell p-1 rounded-xl">
+                <!-- text-xs digantikan dengan text-[13px] pada kelima-lima butang di bawah -->
+                <button onclick="bukaTab('tab-resume')" id="btn-tab-resume" class="nav-btn nav-btn-active py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-file-shield text-[12px]"></i> <span id="nav-1">Imbasan Resume</span>
                 </button>
-                <button onclick="bukaTab('tab-temuduga')" id="btn-tab-temuduga" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-microphone-lines"></i> <span id="nav-2">Temuduga & Vision</span>
+                <button onclick="bukaTab('tab-temuduga')" id="btn-tab-temuduga" class="nav-btn py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-microphone-lines text-[12px]"></i> <span id="nav-2">Temuduga & Vision</span>
                 </button>
-                <button onclick="bukaTab('tab-padanan')" id="btn-tab-padanan" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-compass"></i> <span id="nav-3">Padanan & Gaji</span>
+                <button onclick="bukaTab('tab-padanan')" id="btn-tab-padanan" class="nav-btn py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-compass text-[12px]"></i> <span id="nav-3">Padanan & Gaji</span>
                 </button>
-                <button onclick="bukaTab('tab-jobmatch')" id="btn-tab-jobmatch" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span id="nav-4">Job Match</span>
+                <button onclick="bukaTab('tab-jobmatch')" id="btn-tab-jobmatch" class="nav-btn py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-wand-magic-sparkles text-[12px]"></i> <span id="nav-4">Job Match</span>
                 </button>
-                <button onclick="bukaTab('tab-workcoach')" id="btn-tab-workcoach" class="nav-btn py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all">
-                    <i class="fa-solid fa-briefcase"></i> <span id="nav-5">Work Coach</span>
+                <button onclick="bukaTab('tab-workcoach')" id="btn-tab-workcoach" class="nav-btn py-1.5 px-2.5 rounded-lg font-bold text-[13px] flex items-center justify-center gap-1.5 transition-all">
+                    <i class="fa-solid fa-briefcase text-[12px]"></i> <span id="nav-5">Work Coach</span>
                 </button>
             </nav>
         </div>
@@ -543,7 +677,6 @@
                         <button onclick="analisisVision()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md">
                             <i class="fa-solid fa-camera-retro"></i> <span id="t2-v-cap">Tangkap Gambar & Hentikan Kamera Automatik</span>
                         </button>
-
                         <div id="m2-vision-output" class="prose inner-box hidden"></div>
                     </div>
                 </div>
@@ -615,15 +748,15 @@
                             <label class="theme-label" id="t3-lbl1">Program Pengajian KPTM AS</label>
                             <select id="m3-kursus" class="theme-input">
                                 <option value="Diploma in Computer Science">Diploma in Computer Science</option>
-                        <option value="Diploma in Business Management">Diploma in Business Management</option>
-                        <option value="Diploma in Accounting">Diploma in Accounting</option>
-                        <option value="Diploma in Office Management">Diploma in Office Management</option>
-                        <option value="Diploma in Tourism Management">Diploma in Tourism Management</option>
-                        <option value="Diploma in Sports Management">Diploma in Office Management</option>
-                        <option value="Diploma in Digital Business">Diploma in Digital Business</option>
-                        <option value="Diploma in Digital Marketing">Diploma in Digital Marketing</option>
-                        <option value="Diploma in Islamic Banking & Finance">Diploma in Islamic Banking & Finance</option>
-                        <option value="Diploma in Nursing">Diploma in Nursing</option>
+                                <option value="Diploma in Business Management">Diploma in Business Management</option>
+                                <option value="Diploma in Accounting">Diploma in Accounting</option>
+                                <option value="Diploma in Office Management">Diploma in Office Management</option>
+                                <option value="Diploma in Tourism Management">Diploma in Tourism Management</option>
+                                <option value="Diploma in Sports Management">Diploma in Office Management</option>
+                                <option value="Diploma in Digital Business">Diploma in Digital Business</option>
+                                <option value="Diploma in Digital Marketing">Diploma in Digital Marketing</option>
+                                <option value="Diploma in Islamic Banking & Finance">Diploma in Islamic Banking & Finance</option>
+                                <option value="Diploma in Nursing">Diploma in Nursing</option>
                             </select>
                         </div>
                         <div>
@@ -695,7 +828,7 @@
 
                             <div>
                                 <div class="flex justify-between items-center mb-1">
-                                    <label class="theme-label !mb-0" id="t3b-lbl5">Ayat Rundingan Anda kepada HR</label>
+                                    <label class="text-xs font-bold text-slate-400">Ayat Rundingan Anda kepada HR</label>
                                     <button onclick="isiContohNego()" class="text-xs font-bold hover:underline" style="color: var(--accent-purple);" id="t3b-sample">Isi Contoh Ayat</button>
                                 </div>
                                 <textarea id="nego-hujah" rows="3" class="theme-input" placeholder="Taip alasan dan nilai tambah anda..."></textarea>
@@ -838,12 +971,11 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- FOOTER ASAL YANG KEMAS & MINIMALIS -->
-    <footer class="top-header-shell border-t py-4 px-6 text-center text-xs" style="color: var(--text-muted); border-color: var(--glass-border);" id="footer-text">
-        Grad Ready AI • Ekosistem Kebolehpasaran & Kesediaan Kerjaya Graduan
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-4 px-6 text-center text-xs text-slate-500" id="footer-text">
+        &copy; 2027 Grad Ready AI • Inclusive AI Career Coach Bridging Campus to Industry
     </footer>
 
     <!-- ⬆️ FLOATING ROUNDED BACK TO TOP BUTTON -->
@@ -864,7 +996,7 @@
                 <p class="text-xs leading-relaxed" style="color: var(--text-muted);" id="modal-login-desc">Apabila anda log masuk, nama penuh anda akan dimasukkan secara automatik ke dalam surat Cover Letter & draf e-mel.</p>
                 <div>
                     <label class="theme-label" id="modal-login-email-lbl">Emel</label>
-                    <input type="email" id="login-emel" placeholder="jlopez@gmail.com" class="theme-input">
+                    <input type="email" id="login-emel" placeholder="ali@gmail.com" class="theme-input">
                 </div>
                 <div>
                     <label class="theme-label" id="modal-login-pass-lbl">Kata Laluan</label>
@@ -883,7 +1015,7 @@
                 </div>
                 <div>
                     <label class="theme-label" id="modal-reg-email-lbl">Emel</label>
-                    <input type="email" id="reg-emel" placeholder="ali@kptm.edu.my" class="theme-input">
+                    <input type="email" id="reg-emel" placeholder="ali@gmail.com" class="theme-input">
                 </div>
                 <div>
                     <label class="theme-label" id="modal-reg-pass-lbl">Kata Laluan (Min. 6 Aksara)</label>
@@ -919,7 +1051,6 @@
         let kameraStream = null;
         let recognition = null;
         let sedangRakam = false;
-
         let APP_LANGUAGE = localStorage.getItem('app_lang') || 'MY';
         let AKTIF_USER = null;
         try {
@@ -968,6 +1099,13 @@
             const el = document.getElementById('typewriter-text');
             if (!el) return;
 
+            // Jika "Reduce Motion" dihidupkan, jangan gerakkan typewriter (Statikkan teks sahaja untuk ADHD)
+            if (document.documentElement.classList.contains('reduce-motion')) {
+                const phrases = getTypewriterPhrases();
+                el.textContent = phrases[0];
+                return;
+            }
+
             const phrases = getTypewriterPhrases();
             const currentPhrase = phrases[wordIndex % phrases.length];
 
@@ -994,6 +1132,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Inisialisasi Aksesibiliti dari LocalStorage
+            memuatkanTetapanAksesibiliti();
+
             // 🌗 Set Tema Awal (Default: dark, jika ditukar ke light -> capsule slider bertukar ke kanan ☀️)
             const themeToggleInput = document.getElementById('theme-toggle');
             const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -1025,6 +1166,10 @@
                 const langWrap = document.getElementById('lang-dropdown-wrapper');
                 if (langWrap && !langWrap.contains(e.target)) {
                     document.getElementById('lang-dropdown-menu').classList.add('hidden');
+                }
+                const accessWrap = document.getElementById('access-dropdown-wrapper');
+                if (accessWrap && !accessWrap.contains(e.target)) {
+                    document.getElementById('access-dropdown-menu').classList.add('hidden');
                 }
                 const authWrap = document.getElementById('auth-section');
                 const profMenu = document.getElementById('profile-dropdown-menu');
@@ -1106,6 +1251,11 @@
             document.getElementById('lang-dropdown-menu').classList.toggle('hidden');
         }
 
+        function toggleAccessDropdown(e) {
+            if (e) e.stopPropagation();
+            document.getElementById('access-dropdown-menu').classList.toggle('hidden');
+        }
+
         function pilihBahasa(kod) {
             APP_LANGUAGE = kod;
             localStorage.setItem('app_lang', APP_LANGUAGE);
@@ -1125,13 +1275,103 @@
             if (el) el.innerText = text;
         }
 
+        // ==============================================================================
+        // ♿ ACCESSIBILITY IMPLEMENTATION LOGIC (NO DESTRUCTIVE INFLUENCE ON AI OR UX)
+        // ==============================================================================
+        function larasSaizTeks(skala) {
+            let nialScale = 1;
+            if (skala === 'kecil') nialScale = 0.88;
+            if (skala === 'besar') nialScale = 1.15;
+
+            document.documentElement.style.setProperty('--base-font-scale', nialScale);
+            localStorage.setItem('access_font_scale', skala);
+
+            // Beri visual active state secara dinamik tanpa merosakkan tema warna
+            const buttons = document.querySelectorAll('#access-dropdown-menu button');
+            buttons.forEach(btn => {
+                const isBtnA_Minus = btn.innerText === 'A-';
+                const isBtnA = btn.innerText === 'A';
+                const isBtnA_Plus = btn.innerText === 'A+';
+
+                if ((isBtnA_Minus && skala === 'kecil') || 
+                    (isBtnA && skala === 'normal') || 
+                    (isBtnA_Plus && skala === 'besar')) {
+                    // Butang Aktif (Kekal Ungu Luma Premium)
+                    btn.className = "py-1 text-xs font-bold rounded bg-purple-600 text-white text-center shadow-md";
+                } else if (isBtnA_Minus || isBtnA || isBtnA_Plus) {
+                    // Butang Tidak Aktif (Menggunakan kelas dinamik mengikut mod cerah/gelap)
+                    btn.className = "py-1 text-xs font-bold rounded text-center btn-inactive";
+                }
+            });
+        }
+
+        function toggleKontrasTinggi() {
+            const active = document.getElementById('access-contrast-toggle').checked;
+            if (active) {
+                document.documentElement.classList.add('high-contrast');
+            } else {
+                document.documentElement.classList.remove('high-contrast');
+            }
+            localStorage.setItem('access_high_contrast', active ? 'yes' : 'no');
+        }
+
+        function toggleFontDisleksia() {
+            const active = document.getElementById('access-dyslexic-toggle').checked;
+            if (active) {
+                document.documentElement.classList.add('dyslexic-font');
+            } else {
+                document.documentElement.classList.remove('dyslexic-font');
+            }
+            localStorage.setItem('access_dyslexic_font', active ? 'yes' : 'no');
+        }
+
+        function toggleKurangkanAnimasi() {
+            const active = document.getElementById('access-motion-toggle').checked;
+            if (active) {
+                document.documentElement.classList.add('reduce-motion');
+                // Hentikan typewriter run
+                const el = document.getElementById('typewriter-text');
+                if (el) el.textContent = getTypewriterPhrases()[0];
+            } else {
+                document.documentElement.classList.remove('reduce-motion');
+                // Mulakan semula typewriter run
+                typewriterIndex = 0;
+                isDeleting = false;
+                runTypewriterLoop();
+            }
+            localStorage.setItem('access_reduce_motion', active ? 'yes' : 'no');
+        }
+
+        function memuatkanTetapanAksesibiliti() {
+            const savedScale = localStorage.getItem('access_font_scale') || 'normal';
+            larasSaizTeks(savedScale);
+
+            const savedContrast = localStorage.getItem('access_high_contrast') === 'yes';
+            document.getElementById('access-contrast-toggle').checked = savedContrast;
+            if (savedContrast) document.documentElement.classList.add('high-contrast');
+
+            const savedDyslexic = localStorage.getItem('access_dyslexic_font') === 'yes';
+            document.getElementById('access-dyslexic-toggle').checked = savedDyslexic;
+            if (savedDyslexic) document.documentElement.classList.add('dyslexic-font');
+
+            const savedMotion = localStorage.getItem('access_reduce_motion') === 'yes';
+            document.getElementById('access-motion-toggle').checked = savedMotion;
+            if (savedMotion) document.documentElement.classList.add('reduce-motion');
+        }
+
         function terapkanBahasa() {
             const isEN = APP_LANGUAGE === 'EN';
-
             document.getElementById('current-lang-flag').src = isEN ? "https://flagcdn.com/w20/us.png" : "https://flagcdn.com/w20/my.png";
             setTeks('current-lang-label', isEN ? "English (US)" : "Bahasa Melayu");
-            setTeks('header-desc', isEN ? "Inclusive AI Interview, Job Tailor & Workplace Coach for Future Graduates" : "Jurulatih Temuduga AI, Penyesuai Iklan Kerja & Etika Pejabat untuk Graduan Masa Hadapan");
+            setTeks('header-desc', isEN ? "Inclusive AI Career Coach Bridging Campus to Industry" : "Jurulatih Kerjaya AI Inklusif Menghubungkan Kampus ke Industri");
             updateThemeLabelText();
+
+            // ♿ Terjemahan Aksesibiliti (Bilingual Labeling)
+            setTeks('access-btn-label', isEN ? "Accessibility" : "Aksesibiliti");
+            setTeks('lbl-text-size', isEN ? "Text Size" : "Saiz Teks");
+            setTeks('lbl-contrast', isEN ? "High Contrast" : "Kontras Tinggi");
+            setTeks('lbl-dyslexic', isEN ? "Dyslexia Friendly" : "Mesra Disleksia");
+            setTeks('lbl-motion', isEN ? "Reduce Motion" : "Kurangkan Animasi");
 
             // 5 Navbar Tanpa Nombor
             setTeks('nav-1', isEN ? "Resume Scanner" : "Imbasan Resume");
@@ -1256,20 +1496,23 @@
             setTeks('modal-reg-btn', isEN ? "Sign Up & Log In" : "Daftar & Terus Log Masuk");
             setTeks('modal-has-acc', isEN ? "Already have an account?" : "Sudah ada akaun?");
             setTeks('modal-goto-login', isEN ? "Log In Here" : "Log Masuk Sini");
-            setTeks('footer-text', isEN ? "Grad Ready AI • Graduate Employability & Career Readiness Ecosystem" : "Grad Ready AI • Ekosistem Kebolehpasaran & Kesediaan Kerjaya Graduan");
+            setTeks('footer-text', isEN ? "© 2027 Grad Ready AI • Inclusive AI Career Coach Bridging Campus to Industry" : "© 2027 Grad Ready AI • Jurulatih Kerjaya AI Inklusif Menghubungkan Kampus ke Industri");
         }
 
         function bukaModalAuth() {
             document.getElementById('authModal').classList.remove('hidden');
             paparLoginForm();
         }
+
         function tutupModalAuth() {
             document.getElementById('authModal').classList.add('hidden');
         }
+
         function paparDaftarForm() {
             document.getElementById('loginFormContainer').classList.add('hidden');
             document.getElementById('signupFormContainer').classList.remove('hidden');
         }
+
         function paparLoginForm() {
             document.getElementById('signupFormContainer').classList.add('hidden');
             document.getElementById('loginFormContainer').classList.remove('hidden');
@@ -1281,7 +1524,7 @@
             const abaikan = ["bin", "binti", "bt", "b", "a/l", "a/p", "de", "d", "of", "and", "the"];
             const perkataan = nama.trim().split(/\s+/).filter(w => !abaikan.includes(w.toLowerCase()));
             if (perkataan.length >= 2) {
-                return (perkataan[0][0] + perkataan[1][0]).toUpperCase();
+                return (perkataan[0][0] + perkataat[1][0]).toUpperCase();
             } else if (perkataan.length === 1) {
                 return perkataan[0].substring(0, 2).toUpperCase();
             }
@@ -1308,9 +1551,9 @@
                         <button onclick="bukaProfileMenu(event)" class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-teal-500 text-white font-extrabold text-xs flex items-center justify-center border-2 border-purple-300 shadow-lg transition transform active:scale-95" title="${AKTIF_USER.nama_penuh}">
                             ${singkatan}
                         </button>
-                        <div id="profile-dropdown-menu" class="absolute right-0 mt-2 w-56 glass-card !p-4 hidden z-50">
+                        <div id="profile-dropdown-menu" class="absolute right-0 mt-2 w-56 glass-card !p-4 hidden z-50 animate-fade-in">
                             <p class="text-[10px] font-bold uppercase tracking-wider" style="color: var(--text-muted);">${labelSignedAs}</p>
-                            <p class="text-xs font-extrabold mt-0.5 truncate">${AKTIF_USER.nama_penuh}</p>
+                            <p class="text-xs font-extrabold mt-0.5 truncate text-slate-800 dark:text-white">${AKTIF_USER.nama_penuh}</p>
                             <p class="text-[11px] font-semibold truncate mb-3" style="color: var(--accent-teal);">${AKTIF_USER.program_pengajian || 'Student'}</p>
                             <div class="border-t pt-2.5" style="border-color: var(--glass-border);">
                                 <button onclick="prosesLogout()" class="w-full py-2 px-3 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-500 text-xs font-extrabold flex items-center justify-center gap-2 transition">
@@ -1827,11 +2070,11 @@
             const isEN = APP_LANGUAGE === 'EN';
 
             if (!respon_pelajar.trim()) {
-                alert(isEN ? "Please write your draft response first!" : "Sila tulis draf respon anda terlebih dahulu!");
+                alert(isEN ? "Please write your draft response first!" : "Sila draf respon anda terlebih dahulu!");
                 return;
             }
 
-            hasilDiv.innerHTML = `<div class="py-12 text-center text-amber-500 font-bold animate-pulse"><i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i><p>${isEN ? 'AI Work Coach is evaluating your response across all 5 etiquette dimensions...' : 'AI Work Coach sedang menilai respon anda merangkumi 5 dimensi etika profesional...'}</p></div>`;
+            hasilDiv.innerHTML = `<div class="py-12 text-center text-amber-500 font-bold animate-pulse"><i class="fa-solid fa-spinner fa-spin text-2xl mb-2"></i><p>${isEN ? 'AI Work Coach is evaluating your response across all 5 etiquette dimensions...' : 'AI Work Coach sedang menilai draf respon anda merangkumi 5 dimensi etika profesional...'}</p></div>`;
 
             try {
                 const res = await fetch('/api/work-coach', {
