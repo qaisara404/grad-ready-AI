@@ -373,14 +373,6 @@
             box-shadow: 0 2px 6px rgba(251, 191, 36, 0.4);
         }
 
-        /* Pastikan bulatan suis kekal berada di tengah walaupun Reduce Motion diaktifkan */
-        html.reduce-motion .slider:before {
-            transform: translateY(-50%) !important;
-        }
-        html.reduce-motion input:checked + .slider:before {
-            transform: translateY(-50%) translateX(22px) !important;
-        }
-
         /* ♿ KEKEMASAN BUTANG PANEL AKSESIBILITI MENGIKUT TEMA WARNA AKTIF */
         #access-dropdown-menu button {
             transition: all 0.25s ease;
@@ -1083,11 +1075,10 @@
             }
         };
 
-        // 1. TYPEWRITER INFINITE LOOP (DWI-BAHASA & SENTIASA BERGERAK TANPA BUGS)
+        // 1. TYPEWRITER INFINITE LOOP (DWI-BAHASA & SENTIASA BERGERAK)
         let typewriterIndex = 0;
         let isDeleting = false;
         let wordIndex = 0;
-        let typewriterTimer = null;
 
         function getTypewriterPhrases() {
             if (APP_LANGUAGE === 'EN') {
@@ -1108,14 +1099,8 @@
             const el = document.getElementById('typewriter-text');
             if (!el) return;
 
-            if (typewriterTimer) {
-                clearTimeout(typewriterTimer);
-                typewriterTimer = null;
-            }
-
-            // Jika "Reduce Motion" dihidupkan secara aktif oleh pengguna, statikkan teks
-            const motionToggle = document.getElementById('access-motion-toggle');
-            if (motionToggle && motionToggle.checked) {
+            // Jika "Reduce Motion" dihidupkan, jangan gerakkan typewriter (Statikkan teks sahaja untuk ADHD)
+            if (document.documentElement.classList.contains('reduce-motion')) {
                 const phrases = getTypewriterPhrases();
                 el.textContent = phrases[0];
                 return;
@@ -1143,7 +1128,7 @@
                 speed = 350;
             }
 
-            typewriterTimer = setTimeout(runTypewriterLoop, speed);
+            setTimeout(runTypewriterLoop, speed);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1283,7 +1268,6 @@
             isDeleting = false;
             terapkanBahasa();
             kemaskiniUIAutentikasi();
-            runTypewriterLoop();
         }
 
         function setTeks(id, text) {
@@ -1345,18 +1329,17 @@
             const active = document.getElementById('access-motion-toggle').checked;
             if (active) {
                 document.documentElement.classList.add('reduce-motion');
-                if (typewriterTimer) {
-                    clearTimeout(typewriterTimer);
-                    typewriterTimer = null;
-                }
+                // Hentikan typewriter run
                 const el = document.getElementById('typewriter-text');
                 if (el) el.textContent = getTypewriterPhrases()[0];
             } else {
                 document.documentElement.classList.remove('reduce-motion');
+                // Mulakan semula typewriter run
                 typewriterIndex = 0;
                 isDeleting = false;
                 runTypewriterLoop();
             }
+            localStorage.setItem('access_reduce_motion', active ? 'yes' : 'no');
         }
 
         function memuatkanTetapanAksesibiliti() {
@@ -1371,10 +1354,9 @@
             document.getElementById('access-dyslexic-toggle').checked = savedDyslexic;
             if (savedDyslexic) document.documentElement.classList.add('dyslexic-font');
 
-            // Pastikan Reduce Motion bermula dalam keadaan OFF supaya Typewriter sentiasa bergerak bila buka link
-            localStorage.removeItem('access_reduce_motion');
-            document.getElementById('access-motion-toggle').checked = false;
-            document.documentElement.classList.remove('reduce-motion');
+            const savedMotion = localStorage.getItem('access_reduce_motion') === 'yes';
+            document.getElementById('access-motion-toggle').checked = savedMotion;
+            if (savedMotion) document.documentElement.classList.add('reduce-motion');
         }
 
         function terapkanBahasa() {
@@ -1542,7 +1524,7 @@
             const abaikan = ["bin", "binti", "bt", "b", "a/l", "a/p", "de", "d", "of", "and", "the"];
             const perkataan = nama.trim().split(/\s+/).filter(w => !abaikan.includes(w.toLowerCase()));
             if (perkataan.length >= 2) {
-                return (perkataan[0][0] + perkataan[1][0]).toUpperCase();
+                return (perkataan[0][0] + perkataat[1][0]).toUpperCase();
             } else if (perkataan.length === 1) {
                 return perkataan[0].substring(0, 2).toUpperCase();
             }
